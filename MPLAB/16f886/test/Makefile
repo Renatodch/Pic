@@ -1,0 +1,19 @@
+# MPLAB IDE generated this makefile for use with GNU make.
+# Project: ByRenato.mcp
+# Date: Sun Apr 29 21:55:34 2018
+
+AS = MPASMWIN.exe
+CC = 
+LD = mplink.exe
+AR = mplib.exe
+RM = rm
+
+ByRenato.cof : main.o
+	$(CC) /p16F886 "main.o" /u_DEBUG /z__MPLAB_BUILD=1 /z__MPLAB_DEBUG=1 /o"ByRenato.cof" /M"ByRenato.map" /W
+
+main.o : main.asm C:/Program\ Files\ (x86)/Microchip/MPASM\ Suite/p16f886.inc MACROS.inc
+	$(AS) /q /p16F886 "main.asm" /l"main.lst" /e"main.err" /o"main.o" /d__DEBUG=1
+
+clean : 
+	$(CC) "main.o" "main.err" "main.lst" "ByRenato.cof" "ByRenato.hex"
+

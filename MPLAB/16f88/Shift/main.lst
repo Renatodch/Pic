@@ -1,0 +1,1066 @@
+MPASM  5.51                          MAIN.ASM   9-27-2018  21:47:33         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Warning[205]: Found directive in column 1. (LIST)
+                      00001 LIST    P=16F88
+                      00002 #include "p16f88.inc"
+                      00001         LIST
+                      00002 
+                      00003 ;==========================================================================
+                      00004 ;  MPASM PIC16F88 processor include
+                      00005 ; 
+                      00006 ;  (c) Copyright 1999-2013 Microchip Technology, All rights reserved
+                      00007 ;==========================================================================
+                      00008 
+Message[301]: MESSAGE: (Processor-header file mismatch.  Verify selected processor.)
+                      00549         LIST
+                      00003 #include "Macros.inc"
+Warning[205]: Found directive in column 1. (CBLOCK)
+                      00001 CBLOCK 0x40
+Warning[210]: Extra ","
+  00000040            00002 C5,
+Warning[210]: Extra ","
+  00000041            00003 C6,
+Warning[210]: Extra ","
+  00000042            00004 C7,
+Warning[205]: Found directive in column 1. (ENDC)
+                      00005 ENDC
+                      00006 
+                      00007 LOAD MACRO Reg,Val
+                      00008         movlw Val
+                      00009         movwf Reg
+                      00010         ENDM
+                      00011 
+                      00012         
+                      00013 Delay MACRO val
+                      00014         LOAD C1,val
+                      00015         LOAD C2,0xff    ; Iniciamos contador2 
+                      00016         decfsz C2,1    ; Decrementa Contador2 y si es 0 sale.-     
+                      00017         goto $-1       ; Si no es 0 repetimos ciclo.- 
+                      00018         decfsz C1,1    ; Decrementa Contador1.- 
+                      00019         goto $-4    ; Si no es cero repetimos ciclo.- 
+                      00020         ENDM
+                      00021 
+                      00022 Print MACRO i
+                      00023         movlw 0xF0
+                      00024         andwf PORTB
+                      00025         movf i,0
+                      00026         call msg  
+                      00027         movwf temp ; actual
+                      00028         movlw 0x0F
+                      00029         andwf temp,0
+                      00030         iorwf PORTB,1
+                      00031         
+                      00032         movf i,0
+                      00033         call msg
+                      00034         movwf temp
+MPASM  5.51                          MAIN.ASM   9-27-2018  21:47:33         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00035         movlw 0x70
+                      00036         andwf temp,1
+                      00037         rrf temp
+                      00038         rrf temp
+                      00039         rrf temp
+                      00040         rrf temp
+                      00041         movlw 0xF8
+                      00042         andwf PORTA
+                      00043         movf temp,0
+                      00044         iorwf PORTA,1
+                      00045 
+Warning[205]: Found directive in column 1. (ENDM)
+                      00046 ENDM
+                      00004 
+2007   3F29           00005  __CONFIG _CONFIG1, _FOSC_XT & _WDTE_OFF & _PWRTE_OFF & _MCLRE_ON & _CP_OFF & _CPD_OFF & _BODEN_OFF & _L
+                            VP_OFF
+                      00006 
+2008   3FFC           00007  __CONFIG _CONFIG2, _IESO_OFF  & _FCMEN_OFF
+                      00008  
+  0000000A            00009 dogs         EQU .10  ; delay de multiplexado  CAMBIAR SI NO SALE
+  0000000A            00010 velocidad        EQU .10   ; delay de fotograma   minimo 2 SI QUERES
+  00000010            00011 num_foto     EQU .16  ; define el numero de caract.  NUNCA CAMBIAR
+                      00012 
+Warning[205]: Found directive in column 1. (CBLOCK)
+                      00013 CBLOCK 0x20
+  00000020            00014     C1,C2,CUENTA, i0,i1,i2,i3,delay,k,temp,ste
+Warning[205]: Found directive in column 1. (ENDC)
+                      00015 ENDC
+                      00016 
+Warning[205]: Found directive in column 1. (ORG)
+                      00017 ORG  0X00  
+Warning[203]: Found opcode in column 1. (GOTO)
+0000   2???           00018 GOTO  INICIO 
+Warning[205]: Found directive in column 1. (ORG)
+                      00019 ORG  0X05   
+                      00020     
+0005                  00021 INICIO
+                      00022 ; ###INICIALIZA PUERTOS Y VARIABLES#########
+Warning[205]: Found directive in column 1. (BANKSEL)
+0005   1683 1303      00023 BANKSEL TRISA
+Warning[206]: Found call to macro in column 1. (LOAD)
+                      00024 LOAD TRISA,0x18 
+0007   3018               M         movlw 0x18
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0008   0085               M         movwf TRISA
+Warning[203]: Found opcode in column 1. (CLRF)
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0009   0186           00025 CLRF TRISB
+                      00026 
+Warning[205]: Found directive in column 1. (BANKSEL)
+000A   1683 1303      00027 BANKSEL ANSEL
+Warning[203]: Found opcode in column 1. (CLRF)
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+MPASM  5.51                          MAIN.ASM   9-27-2018  21:47:33         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+000C   019B           00028 CLRF ANSEL
+                      00029 
+Warning[205]: Found directive in column 1. (BANKSEL)
+000D   1283 1303      00030 BANKSEL PORTA
+Warning[203]: Found opcode in column 1. (CLRF)
+000F   0186           00031 CLRF PORTB
+Warning[203]: Found opcode in column 1. (CLRF)
+0010   0185           00032 CLRF PORTA
+                      00033 
+Warning[203]: Found opcode in column 1. (clrf)
+0011   01A7           00034 clrf delay
+Warning[203]: Found opcode in column 1. (clrf)
+0012   01A3           00035 clrf i0
+Warning[203]: Found opcode in column 1. (clrf)
+0013   01A4           00036 clrf i1
+Warning[203]: Found opcode in column 1. (clrf)
+0014   01A5           00037 clrf i2
+Warning[203]: Found opcode in column 1. (clrf)
+0015   01A6           00038 clrf i3
+Warning[203]: Found opcode in column 1. (clrf)
+0016   01AA           00039 clrf ste
+                      00040 ;#####################    
+0017                  00041 Loop
+                      00042 
+Warning[206]: Found call to macro in column 1. (LOAD)
+                      00043 LOAD PORTB,0xE0
+0017   30E0               M         movlw 0xE0
+0018   0086               M         movwf PORTB
+Warning[206]: Found call to macro in column 1. (Print)
+                      00044 Print i0
+0019   30F0               M         movlw 0xF0
+Message[305]: Using default destination of 1 (file).
+001A   0586               M         andwf PORTB
+001B   0823               M         movf i0,0
+001C   2???               M         call msg  
+001D   00A9               M         movwf temp ; actual
+001E   300F               M         movlw 0x0F
+001F   0529               M         andwf temp,0
+0020   0486               M         iorwf PORTB,1
+                          M         
+0021   0823               M         movf i0,0
+0022   2???               M         call msg
+0023   00A9               M         movwf temp
+0024   3070               M         movlw 0x70
+0025   05A9               M         andwf temp,1
+Message[305]: Using default destination of 1 (file).
+0026   0CA9               M         rrf temp
+Message[305]: Using default destination of 1 (file).
+0027   0CA9               M         rrf temp
+Message[305]: Using default destination of 1 (file).
+0028   0CA9               M         rrf temp
+Message[305]: Using default destination of 1 (file).
+0029   0CA9               M         rrf temp
+MPASM  5.51                          MAIN.ASM   9-27-2018  21:47:33         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+002A   30F8               M         movlw 0xF8
+Message[305]: Using default destination of 1 (file).
+002B   0585               M         andwf PORTA
+002C   0829               M         movf temp,0
+002D   0485               M         iorwf PORTA,1
+                          M 
+Warning[206]: Found call to macro in column 1. (Delay)
+                      00045 Delay dogs   
+                          M         LOAD C1,dogs
+002E   300A               M         movlw dogs
+002F   00A0               M         movwf C1
+                          M         LOAD C2,0xff    ; Iniciamos contador2 
+0030   30FF               M         movlw 0xff
+0031   00A1               M         movwf C2
+0032   0BA1               M         decfsz C2,1    ; Decrementa Contador2 y si es 0 sale.-     
+0033   2???               M         goto $-1       ; Si no es 0 repetimos ciclo.- 
+0034   0BA0               M         decfsz C1,1    ; Decrementa Contador1.- 
+0035   2???               M         goto $-4    ; Si no es cero repetimos ciclo.- 
+                      00046 
+Warning[206]: Found call to macro in column 1. (LOAD)
+                      00047 LOAD PORTB,0xD0
+0036   30D0               M         movlw 0xD0
+0037   0086               M         movwf PORTB
+Warning[206]: Found call to macro in column 1. (Print)
+                      00048 Print i1
+0038   30F0               M         movlw 0xF0
+Message[305]: Using default destination of 1 (file).
+0039   0586               M         andwf PORTB
+003A   0824               M         movf i1,0
+003B   2???               M         call msg  
+003C   00A9               M         movwf temp ; actual
+003D   300F               M         movlw 0x0F
+003E   0529               M         andwf temp,0
+003F   0486               M         iorwf PORTB,1
+                          M         
+0040   0824               M         movf i1,0
+0041   2???               M         call msg
+0042   00A9               M         movwf temp
+0043   3070               M         movlw 0x70
+0044   05A9               M         andwf temp,1
+Message[305]: Using default destination of 1 (file).
+0045   0CA9               M         rrf temp
+Message[305]: Using default destination of 1 (file).
+0046   0CA9               M         rrf temp
+Message[305]: Using default destination of 1 (file).
+0047   0CA9               M         rrf temp
+Message[305]: Using default destination of 1 (file).
+0048   0CA9               M         rrf temp
+0049   30F8               M         movlw 0xF8
+Message[305]: Using default destination of 1 (file).
+004A   0585               M         andwf PORTA
+004B   0829               M         movf temp,0
+004C   0485               M         iorwf PORTA,1
+MPASM  5.51                          MAIN.ASM   9-27-2018  21:47:33         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                          M 
+Warning[206]: Found call to macro in column 1. (Delay)
+                      00049 Delay dogs  
+                          M         LOAD C1,dogs
+004D   300A               M         movlw dogs
+004E   00A0               M         movwf C1
+                          M         LOAD C2,0xff    ; Iniciamos contador2 
+004F   30FF               M         movlw 0xff
+0050   00A1               M         movwf C2
+0051   0BA1               M         decfsz C2,1    ; Decrementa Contador2 y si es 0 sale.-     
+0052   2???               M         goto $-1       ; Si no es 0 repetimos ciclo.- 
+0053   0BA0               M         decfsz C1,1    ; Decrementa Contador1.- 
+0054   2???               M         goto $-4    ; Si no es cero repetimos ciclo.- 
+                      00050 
+Warning[206]: Found call to macro in column 1. (LOAD)
+                      00051 LOAD PORTB,0xB0
+0055   30B0               M         movlw 0xB0
+0056   0086               M         movwf PORTB
+Warning[206]: Found call to macro in column 1. (Print)
+                      00052 Print i2
+0057   30F0               M         movlw 0xF0
+Message[305]: Using default destination of 1 (file).
+0058   0586               M         andwf PORTB
+0059   0825               M         movf i2,0
+005A   2???               M         call msg  
+005B   00A9               M         movwf temp ; actual
+005C   300F               M         movlw 0x0F
+005D   0529               M         andwf temp,0
+005E   0486               M         iorwf PORTB,1
+                          M         
+005F   0825               M         movf i2,0
+0060   2???               M         call msg
+0061   00A9               M         movwf temp
+0062   3070               M         movlw 0x70
+0063   05A9               M         andwf temp,1
+Message[305]: Using default destination of 1 (file).
+0064   0CA9               M         rrf temp
+Message[305]: Using default destination of 1 (file).
+0065   0CA9               M         rrf temp
+Message[305]: Using default destination of 1 (file).
+0066   0CA9               M         rrf temp
+Message[305]: Using default destination of 1 (file).
+0067   0CA9               M         rrf temp
+0068   30F8               M         movlw 0xF8
+Message[305]: Using default destination of 1 (file).
+0069   0585               M         andwf PORTA
+006A   0829               M         movf temp,0
+006B   0485               M         iorwf PORTA,1
+                          M 
+Warning[206]: Found call to macro in column 1. (Delay)
+                      00053 Delay dogs   
+                          M         LOAD C1,dogs
+006C   300A               M         movlw dogs
+MPASM  5.51                          MAIN.ASM   9-27-2018  21:47:33         PAGE  6
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+006D   00A0               M         movwf C1
+                          M         LOAD C2,0xff    ; Iniciamos contador2 
+006E   30FF               M         movlw 0xff
+006F   00A1               M         movwf C2
+0070   0BA1               M         decfsz C2,1    ; Decrementa Contador2 y si es 0 sale.-     
+0071   2???               M         goto $-1       ; Si no es 0 repetimos ciclo.- 
+0072   0BA0               M         decfsz C1,1    ; Decrementa Contador1.- 
+0073   2???               M         goto $-4    ; Si no es cero repetimos ciclo.- 
+                      00054 
+Warning[206]: Found call to macro in column 1. (LOAD)
+                      00055 LOAD PORTB,0x70
+0074   3070               M         movlw 0x70
+0075   0086               M         movwf PORTB
+Warning[206]: Found call to macro in column 1. (Print)
+                      00056 Print i3
+0076   30F0               M         movlw 0xF0
+Message[305]: Using default destination of 1 (file).
+0077   0586               M         andwf PORTB
+0078   0826               M         movf i3,0
+0079   2???               M         call msg  
+007A   00A9               M         movwf temp ; actual
+007B   300F               M         movlw 0x0F
+007C   0529               M         andwf temp,0
+007D   0486               M         iorwf PORTB,1
+                          M         
+007E   0826               M         movf i3,0
+007F   2???               M         call msg
+0080   00A9               M         movwf temp
+0081   3070               M         movlw 0x70
+0082   05A9               M         andwf temp,1
+Message[305]: Using default destination of 1 (file).
+0083   0CA9               M         rrf temp
+Message[305]: Using default destination of 1 (file).
+0084   0CA9               M         rrf temp
+Message[305]: Using default destination of 1 (file).
+0085   0CA9               M         rrf temp
+Message[305]: Using default destination of 1 (file).
+0086   0CA9               M         rrf temp
+0087   30F8               M         movlw 0xF8
+Message[305]: Using default destination of 1 (file).
+0088   0585               M         andwf PORTA
+0089   0829               M         movf temp,0
+008A   0485               M         iorwf PORTA,1
+                          M 
+Warning[206]: Found call to macro in column 1. (Delay)
+                      00057 Delay dogs  
+                          M         LOAD C1,dogs
+008B   300A               M         movlw dogs
+008C   00A0               M         movwf C1
+                          M         LOAD C2,0xff    ; Iniciamos contador2 
+008D   30FF               M         movlw 0xff
+008E   00A1               M         movwf C2
+008F   0BA1               M         decfsz C2,1    ; Decrementa Contador2 y si es 0 sale.-     
+MPASM  5.51                          MAIN.ASM   9-27-2018  21:47:33         PAGE  7
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0090   2???               M         goto $-1       ; Si no es 0 repetimos ciclo.- 
+0091   0BA0               M         decfsz C1,1    ; Decrementa Contador1.- 
+0092   2???               M         goto $-4    ; Si no es cero repetimos ciclo.- 
+                      00058 
+Warning[203]: Found opcode in column 1. (movf)
+0093   0805           00059 movf PORTA,0 ;UPAO
+Warning[203]: Found opcode in column 1. (andlw)
+0094   3918           00060 andlw 0x18
+Warning[203]: Found opcode in column 1. (movwf)
+0095   00A9           00061 movwf temp
+Warning[203]: Found opcode in column 1. (movlw)
+0096   3000           00062 movlw 0x00
+Warning[203]: Found opcode in column 1. (bcf)
+0097   1103           00063 bcf STATUS,Z
+Warning[203]: Found opcode in column 1. (xorwf)
+0098   0629           00064 xorwf temp,0
+Warning[203]: Found opcode in column 1. (btfss)
+0099   1D03           00065 btfss STATUS,Z
+Warning[203]: Found opcode in column 1. (GOTO)
+009A   2???           00066 GOTO ELEC
+                      00067 
+Warning[203]: Found opcode in column 1. (bcf)
+009B   102A           00068 bcf ste,0
+Warning[206]: Found call to macro in column 1. (LOAD)
+                      00069 LOAD i0,0x04
+009C   3004               M         movlw 0x04
+009D   00A3               M         movwf i0
+Warning[206]: Found call to macro in column 1. (LOAD)
+                      00070 LOAD i1,0x03
+009E   3003               M         movlw 0x03
+009F   00A4               M         movwf i1
+Warning[206]: Found call to macro in column 1. (LOAD)
+                      00071 LOAD i2,0x02
+00A0   3002               M         movlw 0x02
+00A1   00A5               M         movwf i2
+Warning[206]: Found call to macro in column 1. (LOAD)
+                      00072 LOAD i3,0x01
+00A2   3001               M         movlw 0x01
+00A3   00A6               M         movwf i3
+Warning[203]: Found opcode in column 1. (goto)
+00A4   2???           00073 goto Loop
+                      00074 
+00A5                  00075 ELEC             ;ELEC
+Warning[203]: Found opcode in column 1. (movf)
+00A5   0805           00076 movf PORTA,0
+Warning[203]: Found opcode in column 1. (andlw)
+00A6   3918           00077 andlw 0x18
+Warning[203]: Found opcode in column 1. (movwf)
+00A7   00A9           00078 movwf temp
+Warning[203]: Found opcode in column 1. (movlw)
+00A8   3008           00079 movlw 0x08
+Warning[203]: Found opcode in column 1. (bcf)
+00A9   1103           00080 bcf STATUS,Z
+MPASM  5.51                          MAIN.ASM   9-27-2018  21:47:33         PAGE  8
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Warning[203]: Found opcode in column 1. (xorwf)
+00AA   0629           00081 xorwf temp,0
+Warning[203]: Found opcode in column 1. (btfss)
+00AB   1D03           00082 btfss STATUS,Z
+Warning[203]: Found opcode in column 1. (GOTO)
+00AC   2???           00083 GOTO _2018
+                      00084 
+Warning[203]: Found opcode in column 1. (bcf)
+00AD   102A           00085 bcf ste,0
+Warning[206]: Found call to macro in column 1. (LOAD)
+                      00086 LOAD i0,0x09
+00AE   3009               M         movlw 0x09
+00AF   00A3               M         movwf i0
+Warning[206]: Found call to macro in column 1. (LOAD)
+                      00087 LOAD i1,0x08
+00B0   3008               M         movlw 0x08
+00B1   00A4               M         movwf i1
+Warning[206]: Found call to macro in column 1. (LOAD)
+                      00088 LOAD i2,0x07
+00B2   3007               M         movlw 0x07
+00B3   00A5               M         movwf i2
+Warning[206]: Found call to macro in column 1. (LOAD)
+                      00089 LOAD i3,0x06
+00B4   3006               M         movlw 0x06
+00B5   00A6               M         movwf i3
+Warning[203]: Found opcode in column 1. (goto)
+00B6   2???           00090 goto Loop
+                      00091 
+00B7                  00092 _2018        ; 2018
+Warning[203]: Found opcode in column 1. (movf)
+00B7   0805           00093 movf PORTA,0
+Warning[203]: Found opcode in column 1. (andlw)
+00B8   3918           00094 andlw 0x18
+Warning[203]: Found opcode in column 1. (movwf)
+00B9   00A9           00095 movwf temp
+Warning[203]: Found opcode in column 1. (movlw)
+00BA   3010           00096 movlw 0x10
+Warning[203]: Found opcode in column 1. (bcf)
+00BB   1103           00097 bcf STATUS,Z
+Warning[203]: Found opcode in column 1. (xorwf)
+00BC   0629           00098 xorwf temp,0
+Warning[203]: Found opcode in column 1. (btfss)
+00BD   1D03           00099 btfss STATUS,Z
+Warning[203]: Found opcode in column 1. (GOTO)
+00BE   2???           00100 GOTO SHIFT
+                      00101 
+Warning[203]: Found opcode in column 1. (bcf)
+00BF   102A           00102 bcf ste,0
+Warning[206]: Found call to macro in column 1. (LOAD)
+                      00103 LOAD i0,0x0E
+00C0   300E               M         movlw 0x0E
+00C1   00A3               M         movwf i0
+Warning[206]: Found call to macro in column 1. (LOAD)
+MPASM  5.51                          MAIN.ASM   9-27-2018  21:47:33         PAGE  9
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00104 LOAD i0,0x0E
+00C2   300E               M         movlw 0x0E
+00C3   00A3               M         movwf i0
+Warning[206]: Found call to macro in column 1. (LOAD)
+                      00105 LOAD i0,0x0E
+00C4   300E               M         movlw 0x0E
+00C5   00A3               M         movwf i0
+Warning[206]: Found call to macro in column 1. (LOAD)
+                      00106 LOAD i0,0x0E
+00C6   300E               M         movlw 0x0E
+00C7   00A3               M         movwf i0
+Warning[206]: Found call to macro in column 1. (LOAD)
+                      00107 LOAD i1,0x0D
+00C8   300D               M         movlw 0x0D
+00C9   00A4               M         movwf i1
+Warning[206]: Found call to macro in column 1. (LOAD)
+                      00108 LOAD i2,0x0C
+00CA   300C               M         movlw 0x0C
+00CB   00A5               M         movwf i2
+Warning[206]: Found call to macro in column 1. (LOAD)
+                      00109 LOAD i3,0x0B
+00CC   300B               M         movlw 0x0B
+00CD   00A6               M         movwf i3
+Warning[203]: Found opcode in column 1. (goto)
+00CE   2???           00110 goto Loop
+                      00111 
+00CF                  00112 SHIFT         ; Shift UPAO_ELEC_2018
+Warning[203]: Found opcode in column 1. (movf)
+00CF   0805           00113 movf PORTA,0
+Warning[203]: Found opcode in column 1. (movwf)
+00D0   00A9           00114 movwf temp
+Warning[203]: Found opcode in column 1. (movlw)
+00D1   3018           00115 movlw 0x18
+Warning[203]: Found opcode in column 1. (andwf)
+Message[305]: Using default destination of 1 (file).
+00D2   05A9           00116 andwf temp
+Warning[203]: Found opcode in column 1. (movlw)
+00D3   3018           00117 movlw 0x18
+Warning[203]: Found opcode in column 1. (bcf)
+00D4   1103           00118 bcf STATUS,Z
+Warning[203]: Found opcode in column 1. (xorwf)
+00D5   0629           00119 xorwf temp,0
+Warning[203]: Found opcode in column 1. (btfss)
+00D6   1D03           00120 btfss STATUS,Z
+Warning[203]: Found opcode in column 1. (GOTO)
+00D7   2???           00121 GOTO Loop
+                      00122 
+Warning[203]: Found opcode in column 1. (btfsc)
+00D8   182A           00123 btfsc ste,0
+Warning[203]: Found opcode in column 1. (goto)
+00D9   2???           00124 goto continue
+                      00125 
+Warning[203]: Found opcode in column 1. (clrf)
+MPASM  5.51                          MAIN.ASM   9-27-2018  21:47:33         PAGE 10
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+00DA   01A7           00126 clrf delay
+Warning[203]: Found opcode in column 1. (clrf)
+00DB   01A3           00127 clrf i0
+Warning[203]: Found opcode in column 1. (clrf)
+00DC   01A4           00128 clrf i1
+Warning[203]: Found opcode in column 1. (clrf)
+00DD   01A5           00129 clrf i2
+Warning[203]: Found opcode in column 1. (clrf)
+00DE   01A6           00130 clrf i3
+Warning[203]: Found opcode in column 1. (bsf)
+00DF   142A           00131 bsf ste,0
+                      00132 
+00E0                  00133 continue
+                      00134 
+Warning[203]: Found opcode in column 1. (incf)
+Message[305]: Using default destination of 1 (file).
+00E0   0AA7           00135 incf delay
+Warning[203]: Found opcode in column 1. (movlw)
+00E1   300A           00136 movlw velocidad
+Warning[203]: Found opcode in column 1. (bcf)
+00E2   1103           00137 bcf STATUS,Z
+Warning[203]: Found opcode in column 1. (xorwf)
+00E3   0627           00138 xorwf delay,0
+Warning[203]: Found opcode in column 1. (btfss)
+00E4   1D03           00139 btfss STATUS,Z
+Warning[203]: Found opcode in column 1. (GOTO)
+00E5   2???           00140 GOTO Loop
+Warning[203]: Found opcode in column 1. (clrf)
+00E6   01A7           00141 clrf delay
+                      00142 
+Warning[203]: Found opcode in column 1. (movf)
+00E7   0825           00143 movf i2,0
+Warning[203]: Found opcode in column 1. (movwf)
+00E8   00A6           00144 movwf i3
+Warning[203]: Found opcode in column 1. (movf)
+00E9   0824           00145 movf i1,0
+Warning[203]: Found opcode in column 1. (movwf)
+00EA   00A5           00146 movwf i2
+Warning[203]: Found opcode in column 1. (movf)
+00EB   0823           00147 movf i0,0
+Warning[203]: Found opcode in column 1. (movwf)
+00EC   00A4           00148 movwf i1
+Warning[203]: Found opcode in column 1. (incf)
+Message[305]: Using default destination of 1 (file).
+00ED   0AA3           00149 incf i0
+                      00150 
+Warning[203]: Found opcode in column 1. (movlw)
+00EE   3010           00151 movlw num_foto          ;numero de fotogramas + 1
+Warning[203]: Found opcode in column 1. (bcf)
+00EF   1103           00152 bcf STATUS,Z
+Warning[203]: Found opcode in column 1. (xorwf)
+00F0   0623           00153 xorwf i0,0
+Warning[203]: Found opcode in column 1. (btfss)
+MPASM  5.51                          MAIN.ASM   9-27-2018  21:47:33         PAGE 11
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+00F1   1D03           00154 btfss STATUS,Z
+Warning[203]: Found opcode in column 1. (GOTO)
+00F2   2???           00155 GOTO Loop
+Warning[203]: Found opcode in column 1. (clrf)
+00F3   01A3           00156 clrf i0
+                      00157 
+Warning[203]: Found opcode in column 1. (GOTO)
+00F4   2???           00158 GOTO Loop
+                      00159  
+                      00160 
+00F5                  00161 msg 
+Warning[203]: Found opcode in column 1. (addwf)
+00F5   0782           00162 addwf PCL,1
+Warning[203]: Found opcode in column 1. (retlw)
+00F6   3400           00163 retlw 0x00 ;null
+Warning[203]: Found opcode in column 1. (retlw)
+00F7   343E           00164 retlw 0x3E ;U
+Warning[203]: Found opcode in column 1. (retlw)
+00F8   3467           00165 retlw 0x67 ;P
+Warning[203]: Found opcode in column 1. (retlw)
+00F9   3477           00166 retlw 0x77 ;A
+Warning[203]: Found opcode in column 1. (retlw)
+00FA   347E           00167 retlw 0x7E ;O
+Warning[203]: Found opcode in column 1. (retlw)
+00FB   3408           00168 retlw 0x08 ;_
+Warning[203]: Found opcode in column 1. (retlw)
+00FC   344F           00169 retlw 0x4F ;E
+Warning[203]: Found opcode in column 1. (retlw)
+00FD   340E           00170 retlw 0x0E ;L
+Warning[203]: Found opcode in column 1. (retlw)
+00FE   344F           00171 retlw 0x4F ;E
+Warning[203]: Found opcode in column 1. (retlw)
+00FF   344E           00172 retlw 0x4E ;C
+Warning[203]: Found opcode in column 1. (retlw)
+0100   3408           00173 retlw 0x08 ;_
+Warning[203]: Found opcode in column 1. (retlw)
+0101   346D           00174 retlw 0x6D ;2
+Warning[203]: Found opcode in column 1. (retlw)
+0102   347E           00175 retlw 0x7E ;0
+Warning[203]: Found opcode in column 1. (retlw)
+0103   3430           00176 retlw 0x30 ;1
+Warning[203]: Found opcode in column 1. (retlw)
+0104   347F           00177 retlw 0x7F ;8
+Warning[203]: Found opcode in column 1. (retlw)
+0105   3400           00178 retlw 0x00 ;null
+                      00179 
+Warning[205]: Found directive in column 1. (END)
+3F29 3FFC             00180 END
+MPASM  5.51                          MAIN.ASM   9-27-2018  21:47:33         PAGE 12
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+ADCON0                            0000001F
+ADCON1                            0000009F
+ADCS0                             00000006
+ADCS1                             00000007
+ADCS2                             00000006
+ADDEN                             00000003
+ADFM                              00000007
+ADIE                              00000006
+ADIF                              00000006
+ADON                              00000000
+ADRESH                            0000001E
+ADRESL                            0000009E
+ANS0                              00000000
+ANS1                              00000001
+ANS2                              00000002
+ANS3                              00000003
+ANS4                              00000004
+ANS5                              00000005
+ANS6                              00000006
+ANSEL                             0000009B
+BF                                00000000
+BRGH                              00000002
+C                                 00000000
+C1                                00000020
+C1INV                             00000004
+C1OUT                             00000006
+C2                                00000021
+C2INV                             00000005
+C2OUT                             00000007
+C5                                00000040
+C6                                00000041
+C7                                00000042
+CCP1CON                           00000017
+CCP1IE                            00000002
+CCP1IF                            00000002
+CCP1M0                            00000000
+CCP1M1                            00000001
+CCP1M2                            00000002
+CCP1M3                            00000003
+CCP1X                             00000005
+CCP1Y                             00000004
+CCPR1                             00000015
+CCPR1H                            00000016
+CCPR1L                            00000015
+CHS0                              00000003
+CHS1                              00000004
+CHS2                              00000005
+CIS                               00000003
+CKE                               00000006
+CKP                               00000004
+CM0                               00000000
+CM1                               00000001
+CM2                               00000002
+MPASM  5.51                          MAIN.ASM   9-27-2018  21:47:33         PAGE 13
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+CMCON                             0000009C
+CMIE                              00000006
+CMIF                              00000006
+CREN                              00000004
+CSRC                              00000007
+CUENTA                            00000022
+CVR0                              00000000
+CVR1                              00000001
+CVR2                              00000002
+CVR3                              00000003
+CVRCON                            0000009D
+CVREN                             00000007
+CVROE                             00000006
+CVRR                              00000005
+D                                 00000005
+DATA_ADDRESS                      00000005
+DC                                00000001
+D_A                               00000005
+D_NOT_A                           00000005
+Delay                             
+EEADR                             0000010D
+EEADRH                            0000010F
+EECON1                            0000018C
+EECON2                            0000018D
+EEDATA                            0000010C
+EEDATH                            0000010E
+EEIE                              00000004
+EEIF                              00000004
+EEPGD                             00000007
+ELEC                              000000A5
+F                                 00000001
+FERR                              00000002
+FREE                              00000004
+FSR                               00000004
+GIE                               00000007
+GO                                00000002
+GO_DONE                           00000002
+GO_NOT_DONE                       00000002
+I2C_DATA                          00000005
+I2C_READ                          00000002
+I2C_START                         00000003
+I2C_STOP                          00000004
+INDF                              00000000
+INICIO                            00000005
+INT0IE                            00000004
+INT0IF                            00000001
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+INTF                              00000001
+IOFS                              00000002
+IRCF0                             00000004
+IRCF1                             00000005
+MPASM  5.51                          MAIN.ASM   9-27-2018  21:47:33         PAGE 14
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+IRCF2                             00000006
+IRP                               00000007
+LOAD                              
+Loop                              00000017
+NOT_A                             00000005
+NOT_ADDRESS                       00000005
+NOT_BO                            00000000
+NOT_BOR                           00000000
+NOT_DONE                          00000002
+NOT_PD                            00000003
+NOT_POR                           00000001
+NOT_RBPU                          00000007
+NOT_RC8                           00000006
+NOT_T1SYNC                        00000002
+NOT_TO                            00000004
+NOT_TX8                           00000006
+NOT_W                             00000002
+NOT_WRITE                         00000002
+OERR                              00000001
+OPTION_REG                        00000081
+OSCCON                            0000008F
+OSCTUNE                           00000090
+OSFIE                             00000007
+OSFIF                             00000007
+OSTS                              00000003
+P                                 00000004
+PCL                               00000002
+PCLATH                            0000000A
+PCON                              0000008E
+PEIE                              00000006
+PIE1                              0000008C
+PIE2                              0000008D
+PIR1                              0000000C
+PIR2                              0000000D
+PORTA                             00000005
+PORTB                             00000006
+PR2                               00000092
+PS0                               00000000
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+Print                             
+R                                 00000002
+RA0                               00000000
+RA1                               00000001
+RA2                               00000002
+RA3                               00000003
+RA4                               00000004
+RA5                               00000005
+RA6                               00000006
+RA7                               00000007
+RB0                               00000000
+RB1                               00000001
+MPASM  5.51                          MAIN.ASM   9-27-2018  21:47:33         PAGE 15
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+RB2                               00000002
+RB3                               00000003
+RB4                               00000004
+RB5                               00000005
+RB6                               00000006
+RB7                               00000007
+RBIE                              00000003
+RBIF                              00000000
+RC8_9                             00000006
+RC9                               00000006
+RCD8                              00000000
+RCIE                              00000005
+RCIF                              00000005
+RCREG                             0000001A
+RCSTA                             00000018
+RD                                00000000
+READ_WRITE                        00000002
+RP0                               00000005
+RP1                               00000006
+RX9                               00000006
+RX9D                              00000000
+R_NOT_W                           00000002
+R_W                               00000002
+S                                 00000003
+SCS0                              00000000
+SCS1                              00000001
+SHIFT                             000000CF
+SMP                               00000007
+SPBRG                             00000099
+SPEN                              00000007
+SREN                              00000005
+SSPADD                            00000093
+SSPBUF                            00000013
+SSPCON                            00000014
+SSPEN                             00000005
+SSPIE                             00000003
+SSPIF                             00000003
+SSPM0                             00000000
+SSPM1                             00000001
+SSPM2                             00000002
+SSPM3                             00000003
+SSPOV                             00000006
+SSPSTAT                           00000094
+STATUS                            00000003
+SWDTE                             00000000
+SWDTEN                            00000000
+SYNC                              00000004
+T0CS                              00000005
+T0SE                              00000004
+T1CKPS0                           00000004
+T1CKPS1                           00000005
+T1CON                             00000010
+T1INSYNC                          00000002
+MPASM  5.51                          MAIN.ASM   9-27-2018  21:47:33         PAGE 16
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+T1OSCEN                           00000003
+T1RUN                             00000006
+T2CKPS0                           00000000
+T2CKPS1                           00000001
+T2CON                             00000012
+TMR0                              00000001
+TMR0IE                            00000005
+TMR0IF                            00000002
+TMR1                              0000000E
+TMR1CS                            00000001
+TMR1H                             0000000F
+TMR1IE                            00000000
+TMR1IF                            00000000
+TMR1L                             0000000E
+TMR1ON                            00000000
+TMR2                              00000011
+TMR2IE                            00000001
+TMR2IF                            00000001
+TMR2ON                            00000002
+TOUTPS0                           00000003
+TOUTPS1                           00000004
+TOUTPS2                           00000005
+TOUTPS3                           00000006
+TRISA                             00000085
+TRISA0                            00000000
+TRISA1                            00000001
+TRISA2                            00000002
+TRISA3                            00000003
+TRISA4                            00000004
+TRISA5                            00000005
+TRISA6                            00000006
+TRISA7                            00000007
+TRISB                             00000086
+TRISB0                            00000000
+TRISB1                            00000001
+TRISB2                            00000002
+TRISB3                            00000003
+TRISB4                            00000004
+TRISB5                            00000005
+TRISB6                            00000006
+TRISB7                            00000007
+TRMT                              00000001
+TUN0                              00000000
+TUN1                              00000001
+TUN2                              00000002
+TUN3                              00000003
+TUN4                              00000004
+TUN5                              00000005
+TX8_9                             00000006
+TX9                               00000006
+TX9D                              00000000
+TXD8                              00000000
+TXEN                              00000005
+MPASM  5.51                          MAIN.ASM   9-27-2018  21:47:33         PAGE 17
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+TXIE                              00000004
+TXIF                              00000004
+TXREG                             00000019
+TXSTA                             00000098
+UA                                00000001
+VCFG0                             00000004
+VCFG1                             00000005
+W                                 00000000
+WCOL                              00000007
+WDTCON                            00000105
+WDTPS0                            00000001
+WDTPS1                            00000002
+WDTPS2                            00000003
+WDTPS3                            00000004
+WR                                00000001
+WREN                              00000002
+WRERR                             00000003
+Z                                 00000002
+_.org_1_0033                      00000033
+_.org_1_0035                      00000035
+_.org_1_0052                      00000052
+_.org_1_0054                      00000054
+_.org_1_0071                      00000071
+_.org_1_0073                      00000073
+_.org_1_0090                      00000090
+_.org_1_0092                      00000092
+_BODEN_OFF                        00003FBF
+_BODEN_ON                         00003FFF
+_BOREN_OFF                        00003FBF
+_BOREN_ON                         00003FFF
+_CCP1_RB0                         00003FFF
+_CCP1_RB3                         00002FFF
+_CCPMX_RB0                        00003FFF
+_CCPMX_RB3                        00002FFF
+_CONFIG1                          00002007
+_CONFIG2                          00002008
+_CPD_OFF                          00003FFF
+_CPD_ON                           00003EFF
+_CP_ALL                           00001FFF
+_CP_OFF                           00003FFF
+_CP_ON                            00001FFF
+_DEBUG_OFF                        00003FFF
+_DEBUG_ON                         000037FF
+_DEVID1                           00002006
+_EXTCLK                           00003FEF
+_EXTRC_CLKOUT                     00003FFF
+_EXTRC_IO                         00003FFE
+_FCMEN_OFF                        00003FFE
+_FCMEN_ON                         00003FFF
+_FOSC_EC                          00003FEF
+_FOSC_EXTRCCLK                    00003FFF
+_FOSC_EXTRCIO                     00003FFE
+_FOSC_HS                          00003FEE
+MPASM  5.51                          MAIN.ASM   9-27-2018  21:47:33         PAGE 18
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_FOSC_INTOSCCLK                   00003FFD
+_FOSC_INTOSCIO                    00003FFC
+_FOSC_LP                          00003FEC
+_FOSC_XT                          00003FED
+_HS_OSC                           00003FEE
+_IDLOC0                           00002000
+_IDLOC1                           00002001
+_IDLOC2                           00002002
+_IDLOC3                           00002003
+_IESO_OFF                         00003FFD
+_IESO_ON                          00003FFF
+_INTRC_CLKOUT                     00003FFD
+_INTRC_IO                         00003FFC
+_LP_OSC                           00003FEC
+_LVP_OFF                          00003F7F
+_LVP_ON                           00003FFF
+_MCLRE_OFF                        00003FDF
+_MCLRE_ON                         00003FFF
+_MCLR_OFF                         00003FDF
+_MCLR_ON                          00003FFF
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FF7
+_WDTE_OFF                         00003FFB
+_WDTE_ON                          00003FFF
+_WDT_OFF                          00003FFB
+_WDT_ON                           00003FFF
+_WRT_2048                         00003BFF
+_WRT_256                          00003DFF
+_WRT_ALL                          000039FF
+_WRT_OFF                          00003FFF
+_WRT_PROTECT_2048                 00003BFF
+_WRT_PROTECT_256                  00003DFF
+_WRT_PROTECT_ALL                  000039FF
+_WRT_PROTECT_OFF                  00003FFF
+_XT_OSC                           00003FED
+__16F886                          00000001
+__DEBUG                           1
+continue                          000000E0
+delay                             00000027
+dogs                              0000000A
+i0                                00000023
+i1                                00000024
+i2                                00000025
+i3                                00000026
+k                                 00000028
+msg                               000000F5
+num_foto                          00000010
+ste                               0000002A
+temp                              00000029
+velocidad                         0000000A
+
+MPASM  5.51                          MAIN.ASM   9-27-2018  21:47:33         PAGE 19
+
+
+
+
+
+Errors   :     0
+Warnings :   139 reported,     0 suppressed
+Messages :    31 reported,     0 suppressed
+
+

@@ -1,0 +1,14 @@
+Warning[207] C:\MPLAB_WORKSPAC\PROY6\PROY6.X\PROY6.ASM 37 : Found label after column 1. (TABLA)
+Warning[207] C:\MPLAB_WORKSPAC\PROY6\PROY6.X\PROY6.ASM 41 : Found label after column 1. (INICIO)
+Message[302] C:\MPLAB_WORKSPAC\PROY6\PROY6.X\PROY6.ASM 44 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\MPLAB_WORKSPAC\PROY6\PROY6.X\PROY6.ASM 46 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\MPLAB_WORKSPAC\PROY6\PROY6.X\PROY6.ASM 48 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\MPLAB_WORKSPAC\PROY6\PROY6.X\PROY6.ASM 50 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\MPLAB_WORKSPAC\PROY6\PROY6.X\PROY6.ASM 54 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\MPLAB_WORKSPAC\PROY6\PROY6.X\PROY6.ASM 55 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[207] C:\MPLAB_WORKSPAC\PROY6\PROY6.X\PROY6.ASM 60 : Found label after column 1. (BUCLE)
+Warning[207] C:\MPLAB_WORKSPAC\PROY6\PROY6.X\PROY6.ASM 98 : Found label after column 1. (RESTA)
+Warning[207] C:\MPLAB_WORKSPAC\PROY6\PROY6.X\PROY6.ASM 109 : Found label after column 1. (EXTRAE)
+Warning[207] C:\MPLAB_WORKSPAC\PROY6\PROY6.X\PROY6.ASM 133 : Found label after column 1. (MOSTRAR)
+Warning[207] C:\MPLAB_WORKSPAC\PROY6\PROY6.X\PROY6.ASM 151 : Found label after column 1. (ENVIA)
+Message[305] C:\MPLAB_WORKSPAC\PROY6\PROY6.X\PROY6.ASM 163 : Using default destination of 1 (file).

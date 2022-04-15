@@ -1,0 +1,82 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Wed May 02 13:22:52 2018
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000002
+                   .org_2       code   0x000004    program   0x000002
+                   .org_3       code   0x000005    program   0x000210
+     .config_2007_PROY6.O       code   0x002007    program   0x000002
+     .config_2008_PROY6.O       code   0x002008    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000000      
+                            0x000004    0x00010c      
+                            0x002007    0x002008      
+            268 out of 8455 program addresses used, program memory utilization is 3%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                    Bucle   0x00002b    program     static E:\MPLAB_Workspac\caja\proy6.asm
+                   Bucle1   0x000036    program     static E:\MPLAB_Workspac\caja\proy6.asm
+                    Carga   0x000099    program     static E:\MPLAB_Workspac\caja\proy6.asm
+                  Detecta   0x0000a2    program     static E:\MPLAB_Workspac\caja\proy6.asm
+                    Envia   0x0000ed    program     static E:\MPLAB_Workspac\caja\proy6.asm
+                 EnviaBit   0x0000f0    program     static E:\MPLAB_Workspac\caja\proy6.asm
+                     FILA   0x000072    program     static E:\MPLAB_Workspac\caja\proy6.asm
+                   INT_RB   0x00007a    program     static E:\MPLAB_Workspac\caja\proy6.asm
+                   Inicio   0x000016    program     static E:\MPLAB_Workspac\caja\proy6.asm
+                    Preg1   0x000038    program     static E:\MPLAB_Workspac\caja\proy6.asm
+                  REPEAT1   0x0000fd    program     static E:\MPLAB_Workspac\caja\proy6.asm
+                  REPEAT2   0x0000ff    program     static E:\MPLAB_Workspac\caja\proy6.asm
+                  REPEAT3   0x000108    program     static E:\MPLAB_Workspac\caja\proy6.asm
+                  REPEAT4   0x000106    program     static E:\MPLAB_Workspac\caja\proy6.asm
+                SALIR_INT   0x00009d    program     static E:\MPLAB_Workspac\caja\proy6.asm
+                    delay   0x0000fb    program     static E:\MPLAB_Workspac\caja\proy6.asm
+                       l1   0x0000af    program     static E:\MPLAB_Workspac\caja\proy6.asm
+                       l2   0x0000be    program     static E:\MPLAB_Workspac\caja\proy6.asm
+                       l3   0x0000cd    program     static E:\MPLAB_Workspac\caja\proy6.asm
+                       l4   0x0000da    program     static E:\MPLAB_Workspac\caja\proy6.asm
+                  retardo   0x000104    program     static E:\MPLAB_Workspac\caja\proy6.asm
+                   tabla1   0x000005    program     static E:\MPLAB_Workspac\caja\proy6.asm
+                   tabla2   0x000011    program     static E:\MPLAB_Workspac\caja\proy6.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                   tabla1   0x000005    program     static E:\MPLAB_Workspac\caja\proy6.asm
+                   tabla2   0x000011    program     static E:\MPLAB_Workspac\caja\proy6.asm
+                   Inicio   0x000016    program     static E:\MPLAB_Workspac\caja\proy6.asm
+                    Bucle   0x00002b    program     static E:\MPLAB_Workspac\caja\proy6.asm
+                   Bucle1   0x000036    program     static E:\MPLAB_Workspac\caja\proy6.asm
+                    Preg1   0x000038    program     static E:\MPLAB_Workspac\caja\proy6.asm
+                     FILA   0x000072    program     static E:\MPLAB_Workspac\caja\proy6.asm
+                   INT_RB   0x00007a    program     static E:\MPLAB_Workspac\caja\proy6.asm
+                    Carga   0x000099    program     static E:\MPLAB_Workspac\caja\proy6.asm
+                SALIR_INT   0x00009d    program     static E:\MPLAB_Workspac\caja\proy6.asm
+                  Detecta   0x0000a2    program     static E:\MPLAB_Workspac\caja\proy6.asm
+                       l1   0x0000af    program     static E:\MPLAB_Workspac\caja\proy6.asm
+                       l2   0x0000be    program     static E:\MPLAB_Workspac\caja\proy6.asm
+                       l3   0x0000cd    program     static E:\MPLAB_Workspac\caja\proy6.asm
+                       l4   0x0000da    program     static E:\MPLAB_Workspac\caja\proy6.asm
+                    Envia   0x0000ed    program     static E:\MPLAB_Workspac\caja\proy6.asm
+                 EnviaBit   0x0000f0    program     static E:\MPLAB_Workspac\caja\proy6.asm
+                    delay   0x0000fb    program     static E:\MPLAB_Workspac\caja\proy6.asm
+                  REPEAT1   0x0000fd    program     static E:\MPLAB_Workspac\caja\proy6.asm
+                  REPEAT2   0x0000ff    program     static E:\MPLAB_Workspac\caja\proy6.asm
+                  retardo   0x000104    program     static E:\MPLAB_Workspac\caja\proy6.asm
+                  REPEAT4   0x000106    program     static E:\MPLAB_Workspac\caja\proy6.asm
+                  REPEAT3   0x000108    program     static E:\MPLAB_Workspac\caja\proy6.asm
+
+

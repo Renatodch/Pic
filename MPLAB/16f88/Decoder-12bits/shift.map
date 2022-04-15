@@ -1,0 +1,105 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Sat Oct 06 10:42:40 2018
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000002
+                   .cinit    romdata   0x000001    program   0x000004
+                   .org_1       code   0x000004    program   0x000222
+      .config_2007_MAIN.O       code   0x002007    program   0x000002
+      .config_2008_MAIN.O       code   0x002008    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000002      
+                            0x000004    0x000114      
+                            0x002007    0x002008      
+            278 out of 8455 program addresses used, program memory utilization is 3%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+              Determina_C   0x000065    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+            Determina_C_1   0x000057    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+              Determina_D   0x00007d    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+            Determina_D_1   0x000073    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+              Determina_M   0x000044    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+              Determina_U   0x00008e    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+            Determina_U_1   0x000084    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+                    Envia   0x0000c2    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+                 EnviaBit   0x0000c5    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+                   INICIO   0x000004    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+                    LOW_N   0x000033    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+                     Loop   0x000011    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+                        N   0x0000d2    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+                  NUMEROS   0x00010a    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+                     None   0x0000a5    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+                  Process   0x000040    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+              READING_MUX   0x000024    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+                       S0   0x0000ac    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+                       S1   0x0000b3    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+                     Show   0x0000bb    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+             _.org_1_002C   0x00002c    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+             _.org_1_002E   0x00002e    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+             _.org_1_00C6   0x0000c6    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+             _.org_1_00C8   0x0000c8    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+                      _Ci   0x00003c    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+                     _End   0x000098    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+                       _R   0x000034    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+                  check_c   0x000050    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+                check_h_c   0x00006c    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+                check_low   0x000049    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+                 noupdate   0x000061    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+               noupdate_2   0x00007b    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+               noupdate_3   0x00008c    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+                   rotate   0x00003a    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+                     s1S0   0x0000ba    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                   INICIO   0x000004    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+                     Loop   0x000011    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+              READING_MUX   0x000024    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+             _.org_1_002C   0x00002c    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+             _.org_1_002E   0x00002e    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+                    LOW_N   0x000033    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+                       _R   0x000034    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+                   rotate   0x00003a    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+                      _Ci   0x00003c    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+                  Process   0x000040    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+              Determina_M   0x000044    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+                check_low   0x000049    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+                  check_c   0x000050    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+            Determina_C_1   0x000057    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+                 noupdate   0x000061    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+              Determina_C   0x000065    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+                check_h_c   0x00006c    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+            Determina_D_1   0x000073    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+               noupdate_2   0x00007b    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+              Determina_D   0x00007d    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+            Determina_U_1   0x000084    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+               noupdate_3   0x00008c    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+              Determina_U   0x00008e    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+                     _End   0x000098    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+                     None   0x0000a5    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+                       S0   0x0000ac    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+                       S1   0x0000b3    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+                     s1S0   0x0000ba    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+                     Show   0x0000bb    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+                    Envia   0x0000c2    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+                 EnviaBit   0x0000c5    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+             _.org_1_00C6   0x0000c6    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+             _.org_1_00C8   0x0000c8    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+                        N   0x0000d2    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+                  NUMEROS   0x00010a    program     static E:\MPLAB_Workspace\16f88\Decoder2\main.asm
+
+

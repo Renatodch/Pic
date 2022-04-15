@@ -1,0 +1,65 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Thu Sep 27 21:47:35 2018
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000002
+                   .cinit    romdata   0x000001    program   0x000004
+                   .org_1       code   0x000005    program   0x000202
+      .config_2007_MAIN.O       code   0x002007    program   0x000002
+      .config_2008_MAIN.O       code   0x002008    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000002      
+                            0x000005    0x000105      
+                            0x002007    0x002008      
+            262 out of 8455 program addresses used, program memory utilization is 3%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     ELEC   0x0000a5    program     static E:\MPLAB_Workspace\16f88\DANIEL DIGITAL\main.asm
+                   INICIO   0x000005    program     static E:\MPLAB_Workspace\16f88\DANIEL DIGITAL\main.asm
+                     Loop   0x000017    program     static E:\MPLAB_Workspace\16f88\DANIEL DIGITAL\main.asm
+                    SHIFT   0x0000cf    program     static E:\MPLAB_Workspace\16f88\DANIEL DIGITAL\main.asm
+             _.org_1_0033   0x000033    program     static E:\MPLAB_Workspace\16f88\DANIEL DIGITAL\main.asm
+             _.org_1_0035   0x000035    program     static E:\MPLAB_Workspace\16f88\DANIEL DIGITAL\main.asm
+             _.org_1_0052   0x000052    program     static E:\MPLAB_Workspace\16f88\DANIEL DIGITAL\main.asm
+             _.org_1_0054   0x000054    program     static E:\MPLAB_Workspace\16f88\DANIEL DIGITAL\main.asm
+             _.org_1_0071   0x000071    program     static E:\MPLAB_Workspace\16f88\DANIEL DIGITAL\main.asm
+             _.org_1_0073   0x000073    program     static E:\MPLAB_Workspace\16f88\DANIEL DIGITAL\main.asm
+             _.org_1_0090   0x000090    program     static E:\MPLAB_Workspace\16f88\DANIEL DIGITAL\main.asm
+             _.org_1_0092   0x000092    program     static E:\MPLAB_Workspace\16f88\DANIEL DIGITAL\main.asm
+                    _2018   0x0000b7    program     static E:\MPLAB_Workspace\16f88\DANIEL DIGITAL\main.asm
+                 continue   0x0000e0    program     static E:\MPLAB_Workspace\16f88\DANIEL DIGITAL\main.asm
+                      msg   0x0000f5    program     static E:\MPLAB_Workspace\16f88\DANIEL DIGITAL\main.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                   INICIO   0x000005    program     static E:\MPLAB_Workspace\16f88\DANIEL DIGITAL\main.asm
+                     Loop   0x000017    program     static E:\MPLAB_Workspace\16f88\DANIEL DIGITAL\main.asm
+             _.org_1_0033   0x000033    program     static E:\MPLAB_Workspace\16f88\DANIEL DIGITAL\main.asm
+             _.org_1_0035   0x000035    program     static E:\MPLAB_Workspace\16f88\DANIEL DIGITAL\main.asm
+             _.org_1_0052   0x000052    program     static E:\MPLAB_Workspace\16f88\DANIEL DIGITAL\main.asm
+             _.org_1_0054   0x000054    program     static E:\MPLAB_Workspace\16f88\DANIEL DIGITAL\main.asm
+             _.org_1_0071   0x000071    program     static E:\MPLAB_Workspace\16f88\DANIEL DIGITAL\main.asm
+             _.org_1_0073   0x000073    program     static E:\MPLAB_Workspace\16f88\DANIEL DIGITAL\main.asm
+             _.org_1_0090   0x000090    program     static E:\MPLAB_Workspace\16f88\DANIEL DIGITAL\main.asm
+             _.org_1_0092   0x000092    program     static E:\MPLAB_Workspace\16f88\DANIEL DIGITAL\main.asm
+                     ELEC   0x0000a5    program     static E:\MPLAB_Workspace\16f88\DANIEL DIGITAL\main.asm
+                    _2018   0x0000b7    program     static E:\MPLAB_Workspace\16f88\DANIEL DIGITAL\main.asm
+                    SHIFT   0x0000cf    program     static E:\MPLAB_Workspace\16f88\DANIEL DIGITAL\main.asm
+                 continue   0x0000e0    program     static E:\MPLAB_Workspace\16f88\DANIEL DIGITAL\main.asm
+                      msg   0x0000f5    program     static E:\MPLAB_Workspace\16f88\DANIEL DIGITAL\main.asm
+
+

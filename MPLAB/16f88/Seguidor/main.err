@@ -1,0 +1,125 @@
+Warning[205] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 1 : Found directive in column 1. (LIST)
+Warning[205] E:\MPLAB_WORKSPACE\16F88\SEG\MACROS.INC 42 : Found directive in column 1. (ENDM)
+Warning[205] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 50 : Found directive in column 1. (CBLOCK)
+Warning[205] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 52 : Found directive in column 1. (ENDC)
+Warning[205] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 54 : Found directive in column 1. (ORG)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 55 : Found opcode in column 1. (GOTO)
+Warning[205] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 56 : Found directive in column 1. (ORG)
+Warning[205] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 60 : Found directive in column 1. (BANKSEL)
+Message[302] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 61 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[205] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 63 : Found directive in column 1. (BANKSEL)
+Warning[205] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 67 : Found directive in column 1. (BANKSEL)
+Message[302] E:\MPLAB_WORKSPACE\16F88\SEG\MACROS.INC 5 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[205] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 70 : Found directive in column 1. (BANKSEL)
+Message[302] E:\MPLAB_WORKSPACE\16F88\SEG\MACROS.INC 5 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] E:\MPLAB_WORKSPACE\16F88\SEG\MACROS.INC 5 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[205] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 74 : Found directive in column 1. (BANKSEL)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 78 : Found opcode in column 1. (Call)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 79 : Found opcode in column 1. (Call)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 82 : Found opcode in column 1. (movf)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 83 : Found opcode in column 1. (andlw)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 84 : Found opcode in column 1. (movwf)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 87 : Found opcode in column 1. (movf)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 88 : Found opcode in column 1. (movwf)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 90 : Found opcode in column 1. (movlw)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 91 : Found opcode in column 1. (andwf)
+Message[305] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 91 : Using default destination of 1 (file).
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 92 : Found opcode in column 1. (movf)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 93 : Found opcode in column 1. (andlw)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 94 : Found opcode in column 1. (iorwf)
+Message[305] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 94 : Using default destination of 1 (file).
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 96 : Found opcode in column 1. (rrf)
+Message[305] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 96 : Using default destination of 1 (file).
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 97 : Found opcode in column 1. (rrf)
+Message[305] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 97 : Using default destination of 1 (file).
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 98 : Found opcode in column 1. (rrf)
+Message[305] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 98 : Using default destination of 1 (file).
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 99 : Found opcode in column 1. (rrf)
+Message[305] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 99 : Using default destination of 1 (file).
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 101 : Found opcode in column 1. (movlw)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 102 : Found opcode in column 1. (andwf)
+Message[305] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 102 : Using default destination of 1 (file).
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 103 : Found opcode in column 1. (movlw)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 104 : Found opcode in column 1. (andwf)
+Message[305] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 104 : Using default destination of 1 (file).
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 105 : Found opcode in column 1. (movf)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 106 : Found opcode in column 1. (iorwf)
+Message[305] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 106 : Using default destination of 1 (file).
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 111 : Found opcode in column 1. (movlw)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 112 : Found opcode in column 1. (bcf)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 113 : Found opcode in column 1. (xorwf)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 114 : Found opcode in column 1. (btfss)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 115 : Found opcode in column 1. (GOTO)
+Message[302] E:\MPLAB_WORKSPACE\16F88\SEG\MACROS.INC 5 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 122 : Found opcode in column 1. (movlw)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 123 : Found opcode in column 1. (bcf)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 124 : Found opcode in column 1. (xorwf)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 125 : Found opcode in column 1. (btfss)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 126 : Found opcode in column 1. (GOTO)
+Message[302] E:\MPLAB_WORKSPACE\16F88\SEG\MACROS.INC 5 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 133 : Found opcode in column 1. (movlw)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 134 : Found opcode in column 1. (bcf)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 135 : Found opcode in column 1. (xorwf)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 136 : Found opcode in column 1. (btfss)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 137 : Found opcode in column 1. (GOTO)
+Message[302] E:\MPLAB_WORKSPACE\16F88\SEG\MACROS.INC 5 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 144 : Found opcode in column 1. (movlw)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 145 : Found opcode in column 1. (bcf)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 146 : Found opcode in column 1. (xorwf)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 147 : Found opcode in column 1. (btfss)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 148 : Found opcode in column 1. (GOTO)
+Message[302] E:\MPLAB_WORKSPACE\16F88\SEG\MACROS.INC 5 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 155 : Found opcode in column 1. (movlw)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 156 : Found opcode in column 1. (bcf)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 157 : Found opcode in column 1. (xorwf)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 158 : Found opcode in column 1. (btfss)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 159 : Found opcode in column 1. (GOTO)
+Message[302] E:\MPLAB_WORKSPACE\16F88\SEG\MACROS.INC 5 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 166 : Found opcode in column 1. (bcf)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 167 : Found opcode in column 1. (movf)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 168 : Found opcode in column 1. (movwf)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 169 : Found opcode in column 1. (movlw)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 170 : Found opcode in column 1. (andwf)
+Message[305] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 170 : Using default destination of 1 (file).
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 171 : Found opcode in column 1. (movlw)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 172 : Found opcode in column 1. (xorwf)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 173 : Found opcode in column 1. (btfss)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 174 : Found opcode in column 1. (GOTO)
+Message[302] E:\MPLAB_WORKSPACE\16F88\SEG\MACROS.INC 5 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 183 : Found opcode in column 1. (bcf)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 184 : Found opcode in column 1. (movf)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 185 : Found opcode in column 1. (movwf)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 186 : Found opcode in column 1. (movlw)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 187 : Found opcode in column 1. (andwf)
+Message[305] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 187 : Using default destination of 1 (file).
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 188 : Found opcode in column 1. (movlw)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 189 : Found opcode in column 1. (xorwf)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 190 : Found opcode in column 1. (btfss)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 191 : Found opcode in column 1. (GOTO)
+Message[302] E:\MPLAB_WORKSPACE\16F88\SEG\MACROS.INC 5 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 200 : Found opcode in column 1. (movlw)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 201 : Found opcode in column 1. (bcf)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 202 : Found opcode in column 1. (xorwf)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 203 : Found opcode in column 1. (btfss)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 204 : Found opcode in column 1. (GOTO)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 210 : Found opcode in column 1. (movlw)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 211 : Found opcode in column 1. (bcf)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 212 : Found opcode in column 1. (xorwf)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 213 : Found opcode in column 1. (btfss)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 214 : Found opcode in column 1. (GOTO)
+Message[302] E:\MPLAB_WORKSPACE\16F88\SEG\MACROS.INC 5 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[207] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 226 : Found label after column 1. (Left_D)
+Message[302] E:\MPLAB_WORKSPACE\16F88\SEG\MACROS.INC 5 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[207] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 236 : Found label after column 1. (End_D)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 238 : Found opcode in column 1. (GOTO)
+Message[302] E:\MPLAB_WORKSPACE\16F88\SEG\MACROS.INC 5 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 245 : Using default destination of 1 (file).
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 246 : Found opcode in column 1. (return)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 254 : Found opcode in column 1. (return)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 262 : Found opcode in column 1. (return)
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 270 : Found opcode in column 1. (return)
+Message[305] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 275 : Using default destination of 1 (file).
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 276 : Found opcode in column 1. (return)
+Message[305] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 280 : Using default destination of 1 (file).
+Warning[203] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 281 : Found opcode in column 1. (return)
+Warning[205] E:\MPLAB_WORKSPACE\16F88\SEG\MAIN.ASM 284 : Found directive in column 1. (END)

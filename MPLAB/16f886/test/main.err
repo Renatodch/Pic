@@ -1,0 +1,65 @@
+Warning[205] E:\MPLAB_WORKSPAC\16F886\TEST\MAIN.ASM 1 : Found directive in column 1. (list)
+Warning[205] E:\MPLAB_WORKSPAC\16F886\TEST\MACROS.INC 1 : Found directive in column 1. (CBLOCK)
+Warning[210] E:\MPLAB_WORKSPAC\16F886\TEST\MACROS.INC 2 : Extra ","
+Warning[210] E:\MPLAB_WORKSPAC\16F886\TEST\MACROS.INC 3 : Extra ","
+Warning[210] E:\MPLAB_WORKSPAC\16F886\TEST\MACROS.INC 4 : Extra ","
+Warning[210] E:\MPLAB_WORKSPAC\16F886\TEST\MACROS.INC 5 : Extra ","
+Warning[205] E:\MPLAB_WORKSPAC\16F886\TEST\MACROS.INC 7 : Found directive in column 1. (ENDC)
+Warning[205] E:\MPLAB_WORKSPAC\16F886\TEST\MAIN.ASM 4 : Found directive in column 1. (__CONFIG)
+Warning[205] E:\MPLAB_WORKSPAC\16F886\TEST\MAIN.ASM 5 : Found directive in column 1. (__CONFIG)
+Warning[205] E:\MPLAB_WORKSPAC\16F886\TEST\MAIN.ASM 7 : Found directive in column 1. (CBLOCK)
+Warning[210] E:\MPLAB_WORKSPAC\16F886\TEST\MAIN.ASM 8 : Extra ","
+Warning[210] E:\MPLAB_WORKSPAC\16F886\TEST\MAIN.ASM 9 : Extra ","
+Warning[210] E:\MPLAB_WORKSPAC\16F886\TEST\MAIN.ASM 10 : Extra ","
+Warning[205] E:\MPLAB_WORKSPAC\16F886\TEST\MAIN.ASM 12 : Found directive in column 1. (ENDC)
+Warning[205] E:\MPLAB_WORKSPAC\16F886\TEST\MAIN.ASM 14 : Found directive in column 1. (ORG)
+Warning[203] E:\MPLAB_WORKSPAC\16F886\TEST\MAIN.ASM 15 : Found opcode in column 1. (GOTO)
+Warning[205] E:\MPLAB_WORKSPAC\16F886\TEST\MAIN.ASM 16 : Found directive in column 1. (ORG)
+Warning[203] E:\MPLAB_WORKSPAC\16F886\TEST\MAIN.ASM 17 : Found opcode in column 1. (GOTO)
+Warning[205] E:\MPLAB_WORKSPAC\16F886\TEST\MAIN.ASM 18 : Found directive in column 1. (ORG)
+Warning[206] E:\MPLAB_WORKSPAC\16F886\TEST\MAIN.ASM 22 : Found call to macro in column 1. (LOAD)
+Warning[203] E:\MPLAB_WORKSPAC\16F886\TEST\MAIN.ASM 24 : Found opcode in column 1. (BSF)
+Warning[206] E:\MPLAB_WORKSPAC\16F886\TEST\MAIN.ASM 25 : Found call to macro in column 1. (LOAD)
+Message[302] E:\MPLAB_WORKSPAC\16F886\TEST\MACROS.INC 11 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[206] E:\MPLAB_WORKSPAC\16F886\TEST\MAIN.ASM 26 : Found call to macro in column 1. (LOAD)
+Message[302] E:\MPLAB_WORKSPAC\16F886\TEST\MACROS.INC 11 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[206] E:\MPLAB_WORKSPAC\16F886\TEST\MAIN.ASM 27 : Found call to macro in column 1. (LOAD)
+Warning[206] E:\MPLAB_WORKSPAC\16F886\TEST\MAIN.ASM 28 : Found call to macro in column 1. (LOAD)
+Message[302] E:\MPLAB_WORKSPAC\16F886\TEST\MACROS.INC 11 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[203] E:\MPLAB_WORKSPAC\16F886\TEST\MAIN.ASM 30 : Found opcode in column 1. (BSF)
+Warning[203] E:\MPLAB_WORKSPAC\16F886\TEST\MAIN.ASM 31 : Found opcode in column 1. (CLRF)
+Message[302] E:\MPLAB_WORKSPAC\16F886\TEST\MAIN.ASM 31 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[203] E:\MPLAB_WORKSPAC\16F886\TEST\MAIN.ASM 32 : Found opcode in column 1. (CLRF)
+Message[302] E:\MPLAB_WORKSPAC\16F886\TEST\MAIN.ASM 32 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[203] E:\MPLAB_WORKSPAC\16F886\TEST\MAIN.ASM 34 : Found opcode in column 1. (BCF)
+Warning[203] E:\MPLAB_WORKSPAC\16F886\TEST\MAIN.ASM 35 : Found opcode in column 1. (BCF)
+Warning[206] E:\MPLAB_WORKSPAC\16F886\TEST\MAIN.ASM 36 : Found call to macro in column 1. (LOAD)
+Warning[206] E:\MPLAB_WORKSPAC\16F886\TEST\MAIN.ASM 37 : Found call to macro in column 1. (LOAD)
+Warning[206] E:\MPLAB_WORKSPAC\16F886\TEST\MAIN.ASM 41 : Found call to macro in column 1. (Del)
+Warning[203] E:\MPLAB_WORKSPAC\16F886\TEST\MAIN.ASM 42 : Found opcode in column 1. (bsf)
+Warning[206] E:\MPLAB_WORKSPAC\16F886\TEST\MAIN.ASM 44 : Found call to macro in column 1. (Del)
+Warning[203] E:\MPLAB_WORKSPAC\16F886\TEST\MAIN.ASM 45 : Found opcode in column 1. (bcf)
+Warning[203] E:\MPLAB_WORKSPAC\16F886\TEST\MAIN.ASM 47 : Found opcode in column 1. (GOTO)
+Warning[203] E:\MPLAB_WORKSPAC\16F886\TEST\MAIN.ASM 51 : Found opcode in column 1. (MOVWF)
+Warning[203] E:\MPLAB_WORKSPAC\16F886\TEST\MAIN.ASM 52 : Found opcode in column 1. (MOVF)
+Warning[203] E:\MPLAB_WORKSPAC\16F886\TEST\MAIN.ASM 53 : Found opcode in column 1. (MOVWF)
+Warning[203] E:\MPLAB_WORKSPAC\16F886\TEST\MAIN.ASM 55 : Found opcode in column 1. (BTFSS)
+Warning[203] E:\MPLAB_WORKSPAC\16F886\TEST\MAIN.ASM 56 : Found opcode in column 1. (GOTO)
+Warning[203] E:\MPLAB_WORKSPAC\16F886\TEST\MAIN.ASM 57 : Found opcode in column 1. (GOTO)
+Warning[206] E:\MPLAB_WORKSPAC\16F886\TEST\MAIN.ASM 61 : Found call to macro in column 1. (LOAD)
+Warning[203] E:\MPLAB_WORKSPAC\16F886\TEST\MAIN.ASM 62 : Found opcode in column 1. (GOTO)
+Warning[203] E:\MPLAB_WORKSPAC\16F886\TEST\MAIN.ASM 65 : Found opcode in column 1. (BTFSS)
+Warning[203] E:\MPLAB_WORKSPAC\16F886\TEST\MAIN.ASM 66 : Found opcode in column 1. (GOTO)
+Warning[203] E:\MPLAB_WORKSPAC\16F886\TEST\MAIN.ASM 67 : Found opcode in column 1. (BTFSS)
+Warning[203] E:\MPLAB_WORKSPAC\16F886\TEST\MAIN.ASM 68 : Found opcode in column 1. (GOTO)
+Warning[203] E:\MPLAB_WORKSPAC\16F886\TEST\MAIN.ASM 69 : Found opcode in column 1. (GOTO)
+Warning[203] E:\MPLAB_WORKSPAC\16F886\TEST\MAIN.ASM 70 : Found opcode in column 1. (BSF)
+Warning[203] E:\MPLAB_WORKSPAC\16F886\TEST\MAIN.ASM 71 : Found opcode in column 1. (GOTO)
+Warning[203] E:\MPLAB_WORKSPAC\16F886\TEST\MAIN.ASM 72 : Found opcode in column 1. (BCF)
+Warning[203] E:\MPLAB_WORKSPAC\16F886\TEST\MAIN.ASM 77 : Found opcode in column 1. (BCF)
+Warning[203] E:\MPLAB_WORKSPAC\16F886\TEST\MAIN.ASM 78 : Found opcode in column 1. (BCF)
+Warning[204] E:\MPLAB_WORKSPAC\16F886\TEST\MAIN.ASM 80 : Found pseudo-op in column 1. (MOVFW)
+Warning[203] E:\MPLAB_WORKSPAC\16F886\TEST\MAIN.ASM 81 : Found opcode in column 1. (MOVWF)
+Warning[204] E:\MPLAB_WORKSPAC\16F886\TEST\MAIN.ASM 82 : Found pseudo-op in column 1. (MOVFW)
+Warning[203] E:\MPLAB_WORKSPAC\16F886\TEST\MAIN.ASM 83 : Found opcode in column 1. (RETFIE)
+Warning[205] E:\MPLAB_WORKSPAC\16F886\TEST\MAIN.ASM 86 : Found directive in column 1. (END)

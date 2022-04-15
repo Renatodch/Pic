@@ -1,0 +1,892 @@
+MPASM  5.51                INT_RB_TECLADO.ASM   4-28-2018  1:01:30         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001         list p=16F88 
+                      00002         #include P16F88.inc 
+                      00001         LIST
+                      00002 
+                      00003 ;==========================================================================
+                      00004 ;  MPASM PIC16F88 processor include
+                      00005 ; 
+                      00006 ;  (c) Copyright 1999-2013 Microchip Technology, All rights reserved
+                      00007 ;==========================================================================
+                      00008 
+                      00549         LIST
+2007   3F29           00003         __CONFIG _CONFIG1,(_XT_OSC & _WDT_OFF & _PWRTE_OFF & _BODEN_OFF & _MCLR_ON & _CCP1_RB0  & _CP_OF
+                            F & _CPD_OFF & _DEBUG_OFF & _LVP_OFF & _WRT_PROTECT_OFF) 
+2008   3FFC           00004     __CONFIG _CONFIG2,(_FCMEN_OFF & _IESO_OFF)
+                      00005 ;**** Definicion de variables **** 
+                      00006         
+                      00007         cblock 0x20
+  00000020            00008                 Tecla, Aux, W_Temp, STATUS_Temp, dato,bit,count,var1,var2,var3,var4,u,c1,c2,x,y,c3,c4,de
+                            d       
+                      00009         endc
+                      00010         
+                      00011 ;**** Inicio  del Micro **** 
+                      00012         org  0x00    ; Aqui comienza el micro.- 
+0000   2???           00013         goto  Inicio   ; Salto a inicio de mi programa.- 
+                      00014         org 0x04
+0004   2???           00015         goto INT_RB        
+                      00016         org  0x05  
+                      00017 
+                      00018 
+0005                  00019 tabla1
+Warning[203]: Found opcode in column 1. (ADDWF)
+0005   0782           00020 ADDWF PCL,1
+Warning[205]: Found directive in column 1. (DT)
+0006   343F 3406 345B 00021 DT 0X3F, 0X06, 0X5B,0X4F,0X66,0X6D,0X7d ,0X07,0X7F,0X67,0X00 
+       344F 3466 346D 
+       347D 3407 347F 
+       3467 3400 
+                      00022 
+0011                  00023 tabla2
+Warning[203]: Found opcode in column 1. (ADDWF)
+0011   0782           00024 ADDWF PCL,1
+Warning[205]: Found directive in column 1. (DT)
+0012   3401 3402 3404 00025 DT 0X01,0X02,0X04,0X08
+       3408 
+                      00026   
+                      00027 ;**** Programa principal **** 
+                      00028 ;**** Configuración de puertos **** 
+0016                  00029 Inicio
+0016   1683           00030         bsf STATUS,RP0   ;Pasamos de Banco 0 a Banco 1
+0017   30F0           00031         movlw 0xf0
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0018   0086           00032         movwf TRISB
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+MPASM  5.51                INT_RB_TECLADO.ASM   4-28-2018  1:01:30         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0019   0185           00033         clrf TRISA
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+001A   019B           00034         clrf ANSEL    ;Pines digitales. 
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+001B   1381           00035         bcf OPTION_REG,7
+                      00036 ;**** Configuración de Interrupcion **** 
+001C   1283           00037         bcf STATUS,RP0
+                      00038 
+                      00039 
+001D   100B           00040         bcf INTCON,RBIF
+001E   178B           00041         bsf INTCON,GIE
+001F   158B           00042         bsf INTCON,RBIE
+                      00043   
+                      00044 
+                      00045         
+0020                  00046 Bucle
+0020   01A1           00047     clrf Aux
+                      00048 
+0021   01A6           00049     clrf count
+0022   01B2           00050     clrf ded
+0023   300F           00051     movlw 0x0F
+0024   0085           00052         movwf PORTA
+                      00053 
+0025   300A           00054     movlw .10
+0026   00A7           00055     movwf var1
+0027   00A8           00056     movwf var2
+0028   00A9           00057     movwf var3
+0029   00AA           00058     movwf var4
+                      00059 
+002A   2???           00060         goto Preg1
+                      00061 
+002B                  00062 Bucle1
+002B   0820           00063     movfw Tecla
+002C   00A7           00064     movwf var1
+                      00065    
+002D                  00066 Preg1 
+002D   01AB           00067     clrf u
+002E   01A1           00068     clrf Aux   
+                      00069     
+002F   0827           00070     movfw var1
+0030   2???           00071     call FILA
+0031   1005           00072     bcf PORTA,0
+                      00073                
+0032   0828           00074     movfw var2
+0033   2???           00075     call FILA
+0034   1085           00076     bcf PORTA,1
+                      00077  
+0035   0829           00078     movfw var3
+0036   2???           00079     call FILA
+0037   1105           00080     bcf PORTA,2
+                      00081 
+0038   082A           00082     movfw var4
+0039   2???           00083     call FILA
+MPASM  5.51                INT_RB_TECLADO.ASM   4-28-2018  1:01:30         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+003A   1185           00084     bcf PORTA,3
+                      00085 
+003B   3001           00086     movlw .1           
+003C   0621           00087         xorwf Aux,0     
+003D   1D03           00088         btfss STATUS,Z 
+003E   2???           00089         goto Preg1
+                      00090     
+003F   3001           00091     movlw .1         
+0040   0632           00092         xorwf ded,0       
+0041   1903           00093         btfsc STATUS,Z
+0042   2???           00094     goto Bucle
+                      00095     
+Warning[203]: Found opcode in column 1. (movlw)
+0043   3000           00096 movlw .0
+Warning[203]: Found opcode in column 1. (xorwf)
+0044   0626           00097 xorwf count,0
+Warning[203]: Found opcode in column 1. (btfss)
+0045   1D03           00098 btfss STATUS,Z
+Warning[203]: Found opcode in column 1. (goto)
+0046   2???           00099 goto $+3  
+0047   0AA6           00100     incf count,1
+0048   2???           00101     GOTO Bucle1
+                      00102         
+Warning[203]: Found opcode in column 1. (movlw)
+0049   3001           00103 movlw .1
+Warning[203]: Found opcode in column 1. (xorwf)
+004A   0626           00104 xorwf count,0
+Warning[203]: Found opcode in column 1. (btfss)
+004B   1D03           00105 btfss STATUS,Z
+Warning[203]: Found opcode in column 1. (goto)
+004C   2???           00106 goto $+5  
+004D   0827           00107     movfw var1
+004E   00A8           00108     movwf var2
+004F   0AA6           00109     incf count,1
+0050   2???           00110     GOTO Bucle1
+                      00111 
+Warning[203]: Found opcode in column 1. (movlw)
+0051   3002           00112 movlw .2
+Warning[203]: Found opcode in column 1. (xorwf)
+0052   0626           00113 xorwf count,0
+Warning[203]: Found opcode in column 1. (btfss)
+0053   1D03           00114 btfss STATUS,Z
+Warning[203]: Found opcode in column 1. (goto)
+0054   2???           00115 goto $+7 
+0055   0828           00116     movfw var2
+0056   00A9           00117     movwf var3 
+0057   0827           00118     movfw var1
+0058   00A8           00119     movwf var2
+0059   0AA6           00120     incf count,1
+005A   2???           00121         GOTO Bucle1
+                      00122 
+Warning[203]: Found opcode in column 1. (movlw)
+005B   3003           00123 movlw .3
+MPASM  5.51                INT_RB_TECLADO.ASM   4-28-2018  1:01:30         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Warning[203]: Found opcode in column 1. (xorwf)
+005C   0626           00124 xorwf count,0
+Warning[203]: Found opcode in column 1. (btfss)
+005D   1D03           00125 btfss STATUS,Z
+Warning[203]: Found opcode in column 1. (goto)
+005E   2???           00126 goto Preg1 
+005F   0829           00127     movfw var3
+0060   00AA           00128     movwf var4
+0061   0828           00129     movfw var2
+0062   00A9           00130     movwf var3 
+0063   0827           00131     movfw var1
+0064   00A8           00132     movwf var2
+0065   0AA6           00133     incf count,1
+0066   2???           00134         GOTO Bucle1
+                      00135 
+0067                  00136 FILA
+Warning[203]: Found opcode in column 1. (call)
+0067   2???           00137 call tabla1
+Warning[203]: Found opcode in column 1. (call)
+0068   2???           00138 call Envia
+Warning[204]: Found pseudo-op in column 1. (movfw)
+0069   082B           00139 movfw u
+Warning[203]: Found opcode in column 1. (call)
+006A   2???           00140 call tabla2
+Warning[203]: Found opcode in column 1. (aDDwf)
+006B   0785           00141 aDDwf PORTA,1  
+Warning[203]: Found opcode in column 1. (incf)
+006C   0AAB           00142 incf u,1
+Warning[203]: Found opcode in column 1. (call)
+006D   2???           00143 call delay
+Warning[203]: Found opcode in column 1. (return)
+006E   0008           00144 return
+                      00145 
+                      00146 ;**** Interrupcion *****
+006F                  00147 INT_RB
+006F   00A2           00148         movwf W_Temp  ; Copiamos W a un registro Temporario.
+0070   0E03           00149     swapf STATUS,0  ;Invertimos los nibles del registro STATUS.
+0071   00A3           00150     movwf STATUS_Temp  ; Guardamos STATUS en un registro 
+                      00151          
+0072   1C0B           00152         btfss INTCON,RBIF
+0073   2???           00153         goto SALIR_INT
+                      00154 
+0074   1406           00155         bsf PORTB,0
+0075   1486           00156         bsf PORTB,1
+0076   1106           00157         bcf PORTB,2    ;PORTB=11110011
+0077   3001           00158         movlw .1
+0078   00A0           00159         movwf Tecla    ;Tecla=1
+0079   2???           00160         call Detecta
+007A   3001           00161         movlw .1
+007B   0621           00162         xorwf Aux,0
+007C   1903           00163         btfsc STATUS,Z 
+007D   2???           00164         goto Carga
+                      00165 
+MPASM  5.51                INT_RB_TECLADO.ASM   4-28-2018  1:01:30         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+007E   1406           00166         bsf PORTB,0
+007F   1086           00167         bcf PORTB,1
+0080   1506           00168         bsf PORTB,2     
+0081   3002           00169         movlw .2
+0082   00A0           00170         movwf Tecla
+0083   2???           00171         call Detecta
+0084   3001           00172         movlw .1
+0085   0621           00173         xorwf Aux,0
+0086   1903           00174         btfsc STATUS,Z
+0087   2???           00175         goto Carga
+                      00176 
+0088   1006           00177         bcf PORTB,0
+0089   1486           00178         bsf PORTB,1
+008A   1506           00179         bsf PORTB,2
+008B   3003           00180         movlw .3
+008C   00A0           00181         movwf Tecla
+008D   2???           00182         call Detecta
+                      00183     
+                      00184 
+008E                  00185 Carga   
+008E   1006           00186         bcf PORTB,0
+008F   1086           00187         bcf PORTB,1
+0090   1106           00188         bcf PORTB,2
+0091   100B           00189         bcf INTCON,RBIF
+0092                  00190 SALIR_INT
+0092   0E23           00191         swapf STATUS_Temp,0 ; Invertimos lo nibles de STATUS_Temp.    
+0093   0083           00192         movwf STATUS
+0094   0EA2           00193         swapf W_Temp,1  ; Invertimos los nibles y lo guardamos en el mismo registro.
+0095   0E22           00194     swapf W_Temp,0 
+                      00195  
+0096   0009           00196         retfie
+                      00197 
+0097                  00198 Detecta
+                      00199 
+0097   1A06           00200         btfsc PORTB,4
+0098   2???           00201         goto l1
+0099   2???           00202     call retardo
+009A   1A06           00203     btfsc PORTB,4
+009B   2???           00204     goto l1
+009C   1E06           00205     btfss PORTB,4
+009D   2???           00206     goto $-1
+009E   2???           00207     call retardo
+009F   1E06           00208     btfss PORTB,4
+00A0   2???           00209     goto $-1
+                      00210 
+00A1   3001           00211         movlw .1
+00A2   00A1           00212         movwf Aux
+00A3   0008           00213         return
+00A4                  00214 l1
+00A4   3003           00215         movlw .3
+00A5   07A0           00216         addwf Tecla,1
+00A6   1A86           00217         btfsc PORTB,5
+00A7   2???           00218     goto l2
+MPASM  5.51                INT_RB_TECLADO.ASM   4-28-2018  1:01:30         PAGE  6
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+00A8   2???           00219     call retardo
+00A9   1A86           00220     btfsc PORTB,5
+00AA   2???           00221     goto l2
+00AB   1E86           00222     btfss PORTB,5
+00AC   2???           00223     goto $-1
+00AD   2???           00224     call retardo
+00AE   1E86           00225     btfss PORTB,5
+00AF   2???           00226     goto $-1
+                      00227 
+00B0   3001           00228         movlw .1
+00B1   00A1           00229         movwf Aux
+00B2   0008           00230         return
+00B3                  00231 l2
+00B3   3003           00232         movlw .3
+00B4   07A0           00233         addwf Tecla,1
+00B5   1B06           00234         btfsc PORTB,6
+00B6   2???           00235         goto l3
+00B7   2???           00236     call retardo
+00B8   1B06           00237     btfsc PORTB,6
+00B9   2???           00238     goto l3
+00BA   1F06           00239     btfss PORTB,6
+00BB   2???           00240     goto $-1
+00BC   2???           00241     call retardo
+00BD   1F06           00242     btfss PORTB,6
+00BE   2???           00243     goto $-1
+00BF   3001           00244         movlw .1
+00C0   00A1           00245         movwf Aux
+00C1   0008           00246         return
+00C2                  00247 l3
+00C2   3003           00248         movlw .3
+00C3   07A0           00249         addwf Tecla,1  
+00C4   1B86           00250         btfsc PORTB,7
+00C5   2???           00251     goto l4
+00C6   2???           00252     call retardo
+00C7   1B86           00253     btfsc PORTB,7
+00C8   2???           00254     goto l4
+00C9   1F86           00255     btfss PORTB,7
+00CA   2???           00256     goto $-1
+00CB   2???           00257     call retardo
+00CC   1F86           00258     btfss PORTB,7
+00CD   2???           00259     goto $-4
+00CE   2???           00260     goto $+2
+                      00261      
+00CF                  00262 l4
+00CF   0008           00263         return
+                      00264 
+00D0   1886           00265         btfsc PORTB,1
+00D1   2???           00266         goto $+5
+00D2   01A0           00267         clrf Tecla
+00D3   3001           00268         movlw .1
+00D4   00A1           00269         movwf Aux
+00D5   0008           00270     return
+                      00271 
+MPASM  5.51                INT_RB_TECLADO.ASM   4-28-2018  1:01:30         PAGE  7
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+00D6   1806           00272     btfsc PORTB,0
+00D7   2???           00273     goto $+5
+00D8   3001           00274         movlw .1
+00D9   00B2           00275         movwf ded
+00DA   00A1           00276     movwf Aux
+00DB   0008           00277         return
+                      00278 
+00DC   1906           00279     btfsc PORTB,2
+00DD   2???           00280     goto $+4
+00DE   3001           00281         movlw .1
+00DF   00B2           00282         movwf ded
+00E0   00A1           00283     movwf Aux
+00E1   0008           00284         return
+                      00285 
+00E2                  00286 Envia
+00E2   00A4           00287         movwf dato
+00E3   3008           00288         movlw d'8'      ; Número de bits a transmitir.
+00E4   00A5           00289         movwf bit
+00E5                  00290 EnviaBit              ; Comienza a enviar datos.
+00E5   1FA4           00291         btfss dato,7  ; ¿Es un "1" el bit a transmitir?
+00E6   2???           00292         goto $+3
+00E7   1186           00293         bCf PORTB,3    ; Si, Transmite un "1".
+00E8   2???           00294         goto $+2
+00E9   1586           00295         bSf PORTB,3    ; No, pues envía un "0".
+00EA   1205           00296         bcf PORTA,4  ; Clock=0.
+00EB   1605           00297         bsf PORTA,4  ; Clock=1.
+00EC   0DA4           00298     rlf dato,1  ; Rota para envia siguiente bit.-
+00ED   0BA5           00299     decfsz bit,1    ; Comprueba si es el último bit. 7,6,5,4,3,2,1,0
+00EE   2???           00300         goto EnviaBit    ; No es el último bit repite la operación.    
+00EF   0008           00301     return     
+                      00302 
+00F0                  00303 delay
+Warning[203]: Found opcode in column 1. (movlw)
+00F0   300A           00304 movlw .10       
+Warning[203]: Found opcode in column 1. (movwf)
+00F1   00AC           00305 movwf c1
+00F2                  00306 REPEAT1
+Warning[203]: Found opcode in column 1. (movlw)
+00F2   3014           00307 movlw .20
+Warning[203]: Found opcode in column 1. (movwf)
+00F3   00AD           00308 movwf c2
+00F4                  00309 REPEAT2
+Warning[203]: Found opcode in column 1. (decfsz)
+00F4   0BAD           00310 decfsz c2,1
+Warning[203]: Found opcode in column 1. (goto)
+00F5   2???           00311 goto REPEAT2
+                      00312 
+Warning[203]: Found opcode in column 1. (decfsz)
+00F6   0BAC           00313 decfsz c1,1
+Warning[203]: Found opcode in column 1. (goto)
+00F7   2???           00314 goto REPEAT1
+Warning[203]: Found opcode in column 1. (return)
+00F8   0008           00315 return     
+MPASM  5.51                INT_RB_TECLADO.ASM   4-28-2018  1:01:30         PAGE  8
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00316 
+00F9                  00317 retardo
+Warning[203]: Found opcode in column 1. (movlw)
+00F9   30C8           00318 movlw .200
+Warning[203]: Found opcode in column 1. (movwf)
+00FA   00B0           00319 movwf c3
+00FB                  00320 REPEAT4
+Warning[203]: Found opcode in column 1. (movlw)
+00FB   3032           00321 movlw .50
+Warning[203]: Found opcode in column 1. (movwf)
+00FC   00B1           00322 movwf c4
+00FD                  00323 REPEAT3
+Warning[203]: Found opcode in column 1. (decfsz)
+00FD   0BB1           00324 decfsz c4,1
+Warning[203]: Found opcode in column 1. (goto)
+00FE   2???           00325 goto REPEAT3
+                      00326 
+Warning[203]: Found opcode in column 1. (decfsz)
+00FF   0BB0           00327 decfsz c3,1
+Warning[203]: Found opcode in column 1. (goto)
+0100   2???           00328 goto REPEAT4
+Warning[203]: Found opcode in column 1. (return)
+0101   0008           00329 return
+                      00330    
+                      00331 
+3F29 3FFC             00332     end
+MPASM  5.51                INT_RB_TECLADO.ASM   4-28-2018  1:01:30         PAGE  9
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+ADCON0                            0000001F
+ADCON1                            0000009F
+ADCS0                             00000006
+ADCS1                             00000007
+ADCS2                             00000006
+ADDEN                             00000003
+ADFM                              00000007
+ADIE                              00000006
+ADIF                              00000006
+ADON                              00000000
+ADRESH                            0000001E
+ADRESL                            0000009E
+ANS0                              00000000
+ANS1                              00000001
+ANS2                              00000002
+ANS3                              00000003
+ANS4                              00000004
+ANS5                              00000005
+ANS6                              00000006
+ANSEL                             0000009B
+Aux                               00000021
+BF                                00000000
+BRGH                              00000002
+Bucle                             00000020
+Bucle1                            0000002B
+C                                 00000000
+C1INV                             00000004
+C1OUT                             00000006
+C2INV                             00000005
+C2OUT                             00000007
+CCP1CON                           00000017
+CCP1IE                            00000002
+CCP1IF                            00000002
+CCP1M0                            00000000
+CCP1M1                            00000001
+CCP1M2                            00000002
+CCP1M3                            00000003
+CCP1X                             00000005
+CCP1Y                             00000004
+CCPR1                             00000015
+CCPR1H                            00000016
+CCPR1L                            00000015
+CHS0                              00000003
+CHS1                              00000004
+CHS2                              00000005
+CIS                               00000003
+CKE                               00000006
+CKP                               00000004
+CM0                               00000000
+CM1                               00000001
+CM2                               00000002
+CMCON                             0000009C
+CMIE                              00000006
+MPASM  5.51                INT_RB_TECLADO.ASM   4-28-2018  1:01:30         PAGE 10
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+CMIF                              00000006
+CREN                              00000004
+CSRC                              00000007
+CVR0                              00000000
+CVR1                              00000001
+CVR2                              00000002
+CVR3                              00000003
+CVRCON                            0000009D
+CVREN                             00000007
+CVROE                             00000006
+CVRR                              00000005
+Carga                             0000008E
+D                                 00000005
+DATA_ADDRESS                      00000005
+DC                                00000001
+D_A                               00000005
+D_NOT_A                           00000005
+Detecta                           00000097
+EEADR                             0000010D
+EEADRH                            0000010F
+EECON1                            0000018C
+EECON2                            0000018D
+EEDATA                            0000010C
+EEDATH                            0000010E
+EEIE                              00000004
+EEIF                              00000004
+EEPGD                             00000007
+Envia                             000000E2
+EnviaBit                          000000E5
+F                                 00000001
+FERR                              00000002
+FILA                              00000067
+FREE                              00000004
+FSR                               00000004
+GIE                               00000007
+GO                                00000002
+GO_DONE                           00000002
+GO_NOT_DONE                       00000002
+I2C_DATA                          00000005
+I2C_READ                          00000002
+I2C_START                         00000003
+I2C_STOP                          00000004
+INDF                              00000000
+INT0IE                            00000004
+INT0IF                            00000001
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+INTF                              00000001
+INT_RB                            0000006F
+IOFS                              00000002
+IRCF0                             00000004
+IRCF1                             00000005
+MPASM  5.51                INT_RB_TECLADO.ASM   4-28-2018  1:01:30         PAGE 11
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+IRCF2                             00000006
+IRP                               00000007
+Inicio                            00000016
+NOT_A                             00000005
+NOT_ADDRESS                       00000005
+NOT_BO                            00000000
+NOT_BOR                           00000000
+NOT_DONE                          00000002
+NOT_PD                            00000003
+NOT_POR                           00000001
+NOT_RBPU                          00000007
+NOT_RC8                           00000006
+NOT_T1SYNC                        00000002
+NOT_TO                            00000004
+NOT_TX8                           00000006
+NOT_W                             00000002
+NOT_WRITE                         00000002
+OERR                              00000001
+OPTION_REG                        00000081
+OSCCON                            0000008F
+OSCTUNE                           00000090
+OSFIE                             00000007
+OSFIF                             00000007
+OSTS                              00000003
+P                                 00000004
+PCL                               00000002
+PCLATH                            0000000A
+PCON                              0000008E
+PEIE                              00000006
+PIE1                              0000008C
+PIE2                              0000008D
+PIR1                              0000000C
+PIR2                              0000000D
+PORTA                             00000005
+PORTB                             00000006
+PR2                               00000092
+PS0                               00000000
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+Preg1                             0000002D
+R                                 00000002
+RA0                               00000000
+RA1                               00000001
+RA2                               00000002
+RA3                               00000003
+RA4                               00000004
+RA5                               00000005
+RA6                               00000006
+RA7                               00000007
+RB0                               00000000
+RB1                               00000001
+RB2                               00000002
+MPASM  5.51                INT_RB_TECLADO.ASM   4-28-2018  1:01:30         PAGE 12
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+RB3                               00000003
+RB4                               00000004
+RB5                               00000005
+RB6                               00000006
+RB7                               00000007
+RBIE                              00000003
+RBIF                              00000000
+RC8_9                             00000006
+RC9                               00000006
+RCD8                              00000000
+RCIE                              00000005
+RCIF                              00000005
+RCREG                             0000001A
+RCSTA                             00000018
+RD                                00000000
+READ_WRITE                        00000002
+REPEAT1                           000000F2
+REPEAT2                           000000F4
+REPEAT3                           000000FD
+REPEAT4                           000000FB
+RP0                               00000005
+RP1                               00000006
+RX9                               00000006
+RX9D                              00000000
+R_NOT_W                           00000002
+R_W                               00000002
+S                                 00000003
+SALIR_INT                         00000092
+SCS0                              00000000
+SCS1                              00000001
+SMP                               00000007
+SPBRG                             00000099
+SPEN                              00000007
+SREN                              00000005
+SSPADD                            00000093
+SSPBUF                            00000013
+SSPCON                            00000014
+SSPEN                             00000005
+SSPIE                             00000003
+SSPIF                             00000003
+SSPM0                             00000000
+SSPM1                             00000001
+SSPM2                             00000002
+SSPM3                             00000003
+SSPOV                             00000006
+SSPSTAT                           00000094
+STATUS                            00000003
+STATUS_Temp                       00000023
+SWDTE                             00000000
+SWDTEN                            00000000
+SYNC                              00000004
+T0CS                              00000005
+T0SE                              00000004
+MPASM  5.51                INT_RB_TECLADO.ASM   4-28-2018  1:01:30         PAGE 13
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+T1CKPS0                           00000004
+T1CKPS1                           00000005
+T1CON                             00000010
+T1INSYNC                          00000002
+T1OSCEN                           00000003
+T1RUN                             00000006
+T2CKPS0                           00000000
+T2CKPS1                           00000001
+T2CON                             00000012
+TMR0                              00000001
+TMR0IE                            00000005
+TMR0IF                            00000002
+TMR1                              0000000E
+TMR1CS                            00000001
+TMR1H                             0000000F
+TMR1IE                            00000000
+TMR1IF                            00000000
+TMR1L                             0000000E
+TMR1ON                            00000000
+TMR2                              00000011
+TMR2IE                            00000001
+TMR2IF                            00000001
+TMR2ON                            00000002
+TOUTPS0                           00000003
+TOUTPS1                           00000004
+TOUTPS2                           00000005
+TOUTPS3                           00000006
+TRISA                             00000085
+TRISA0                            00000000
+TRISA1                            00000001
+TRISA2                            00000002
+TRISA3                            00000003
+TRISA4                            00000004
+TRISA5                            00000005
+TRISA6                            00000006
+TRISA7                            00000007
+TRISB                             00000086
+TRISB0                            00000000
+TRISB1                            00000001
+TRISB2                            00000002
+TRISB3                            00000003
+TRISB4                            00000004
+TRISB5                            00000005
+TRISB6                            00000006
+TRISB7                            00000007
+TRMT                              00000001
+TUN0                              00000000
+TUN1                              00000001
+TUN2                              00000002
+TUN3                              00000003
+TUN4                              00000004
+TUN5                              00000005
+TX8_9                             00000006
+MPASM  5.51                INT_RB_TECLADO.ASM   4-28-2018  1:01:30         PAGE 14
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+TX9                               00000006
+TX9D                              00000000
+TXD8                              00000000
+TXEN                              00000005
+TXIE                              00000004
+TXIF                              00000004
+TXREG                             00000019
+TXSTA                             00000098
+Tecla                             00000020
+UA                                00000001
+VCFG0                             00000004
+VCFG1                             00000005
+W                                 00000000
+WCOL                              00000007
+WDTCON                            00000105
+WDTPS0                            00000001
+WDTPS1                            00000002
+WDTPS2                            00000003
+WDTPS3                            00000004
+WR                                00000001
+WREN                              00000002
+WRERR                             00000003
+W_Temp                            00000022
+Z                                 00000002
+_.org_2_0046                      00000046
+_.org_2_004C                      0000004C
+_.org_2_0054                      00000054
+_.org_2_009D                      0000009D
+_.org_2_00A0                      000000A0
+_.org_2_00AC                      000000AC
+_.org_2_00AF                      000000AF
+_.org_2_00BB                      000000BB
+_.org_2_00BE                      000000BE
+_.org_2_00CA                      000000CA
+_.org_2_00CD                      000000CD
+_.org_2_00CE                      000000CE
+_.org_2_00D1                      000000D1
+_.org_2_00D7                      000000D7
+_.org_2_00DD                      000000DD
+_.org_2_00E6                      000000E6
+_.org_2_00E8                      000000E8
+_BODEN_OFF                        00003FBF
+_BODEN_ON                         00003FFF
+_BOREN_OFF                        00003FBF
+_BOREN_ON                         00003FFF
+_CCP1_RB0                         00003FFF
+_CCP1_RB3                         00002FFF
+_CCPMX_RB0                        00003FFF
+_CCPMX_RB3                        00002FFF
+_CONFIG1                          00002007
+_CONFIG2                          00002008
+_CPD_OFF                          00003FFF
+_CPD_ON                           00003EFF
+MPASM  5.51                INT_RB_TECLADO.ASM   4-28-2018  1:01:30         PAGE 15
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_CP_ALL                           00001FFF
+_CP_OFF                           00003FFF
+_CP_ON                            00001FFF
+_DEBUG_OFF                        00003FFF
+_DEBUG_ON                         000037FF
+_DEVID1                           00002006
+_EXTCLK                           00003FEF
+_EXTRC_CLKOUT                     00003FFF
+_EXTRC_IO                         00003FFE
+_FCMEN_OFF                        00003FFE
+_FCMEN_ON                         00003FFF
+_FOSC_EC                          00003FEF
+_FOSC_EXTRCCLK                    00003FFF
+_FOSC_EXTRCIO                     00003FFE
+_FOSC_HS                          00003FEE
+_FOSC_INTOSCCLK                   00003FFD
+_FOSC_INTOSCIO                    00003FFC
+_FOSC_LP                          00003FEC
+_FOSC_XT                          00003FED
+_HS_OSC                           00003FEE
+_IDLOC0                           00002000
+_IDLOC1                           00002001
+_IDLOC2                           00002002
+_IDLOC3                           00002003
+_IESO_OFF                         00003FFD
+_IESO_ON                          00003FFF
+_INTRC_CLKOUT                     00003FFD
+_INTRC_IO                         00003FFC
+_LP_OSC                           00003FEC
+_LVP_OFF                          00003F7F
+_LVP_ON                           00003FFF
+_MCLRE_OFF                        00003FDF
+_MCLRE_ON                         00003FFF
+_MCLR_OFF                         00003FDF
+_MCLR_ON                          00003FFF
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FF7
+_WDTE_OFF                         00003FFB
+_WDTE_ON                          00003FFF
+_WDT_OFF                          00003FFB
+_WDT_ON                           00003FFF
+_WRT_2048                         00003BFF
+_WRT_256                          00003DFF
+_WRT_ALL                          000039FF
+_WRT_OFF                          00003FFF
+_WRT_PROTECT_2048                 00003BFF
+_WRT_PROTECT_256                  00003DFF
+_WRT_PROTECT_ALL                  000039FF
+_WRT_PROTECT_OFF                  00003FFF
+_XT_OSC                           00003FED
+__16F88                           00000001
+__DEBUG                           1
+bit                               00000025
+MPASM  5.51                INT_RB_TECLADO.ASM   4-28-2018  1:01:30         PAGE 16
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+c1                                0000002C
+c2                                0000002D
+c3                                00000030
+c4                                00000031
+count                             00000026
+dato                              00000024
+ded                               00000032
+delay                             000000F0
+l1                                000000A4
+l2                                000000B3
+l3                                000000C2
+l4                                000000CF
+retardo                           000000F9
+tabla1                            00000005
+tabla2                            00000011
+u                                 0000002B
+var1                              00000027
+var2                              00000028
+var3                              00000029
+var4                              0000002A
+x                                 0000002E
+y                                 0000002F
+
+Errors   :     0
+Warnings :    46 reported,     0 suppressed
+Messages :     4 reported,     0 suppressed
+
+

@@ -1,0 +1,85 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Wed Oct 03 01:17:21 2018
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000002
+                   .cinit    romdata   0x000001    program   0x000004
+                   .org_1       code   0x000005    program   0x00039e
+      .config_2007_MAIN.O       code   0x002007    program   0x000002
+      .config_2008_MAIN.O       code   0x002008    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000002      
+                            0x000005    0x0001d3      
+                            0x002007    0x002008      
+            468 out of 8455 program addresses used, program memory utilization is 5%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+          ALBERT_BLANCO_1   0x00011e    program     static E:\MPLAB_Workspace\16f88\AlbertBlanco\main.asm
+          ALBERT_BLANCO_2   0x00012e    program     static E:\MPLAB_Workspace\16f88\AlbertBlanco\main.asm
+                    ED2_1   0x000164    program     static E:\MPLAB_Workspace\16f88\AlbertBlanco\main.asm
+                    ED2_2   0x00017d    program     static E:\MPLAB_Workspace\16f88\AlbertBlanco\main.asm
+                    Envia   0x000093    program     static E:\MPLAB_Workspace\16f88\AlbertBlanco\main.asm
+                 EnviaBit   0x000096    program     static E:\MPLAB_Workspace\16f88\AlbertBlanco\main.asm
+                   INICIO   0x000005    program     static E:\MPLAB_Workspace\16f88\AlbertBlanco\main.asm
+                   Jhon_1   0x0001b2    program     static E:\MPLAB_Workspace\16f88\AlbertBlanco\main.asm
+                   Jhon_2   0x0001c3    program     static E:\MPLAB_Workspace\16f88\AlbertBlanco\main.asm
+                     LM_1   0x000196    program     static E:\MPLAB_Workspace\16f88\AlbertBlanco\main.asm
+                     LM_2   0x0001a4    program     static E:\MPLAB_Workspace\16f88\AlbertBlanco\main.asm
+                     Loop   0x000016    program     static E:\MPLAB_Workspace\16f88\AlbertBlanco\main.asm
+                    U_E_1   0x00013e    program     static E:\MPLAB_Workspace\16f88\AlbertBlanco\main.asm
+                    U_E_2   0x000151    program     static E:\MPLAB_Workspace\16f88\AlbertBlanco\main.asm
+             _.org_1_002D   0x00002d    program     static E:\MPLAB_Workspace\16f88\AlbertBlanco\main.asm
+             _.org_1_002F   0x00002f    program     static E:\MPLAB_Workspace\16f88\AlbertBlanco\main.asm
+             _.org_1_0047   0x000047    program     static E:\MPLAB_Workspace\16f88\AlbertBlanco\main.asm
+             _.org_1_0049   0x000049    program     static E:\MPLAB_Workspace\16f88\AlbertBlanco\main.asm
+             _.org_1_0061   0x000061    program     static E:\MPLAB_Workspace\16f88\AlbertBlanco\main.asm
+             _.org_1_0063   0x000063    program     static E:\MPLAB_Workspace\16f88\AlbertBlanco\main.asm
+             _.org_1_007B   0x00007b    program     static E:\MPLAB_Workspace\16f88\AlbertBlanco\main.asm
+             _.org_1_007D   0x00007d    program     static E:\MPLAB_Workspace\16f88\AlbertBlanco\main.asm
+             _.org_1_0097   0x000097    program     static E:\MPLAB_Workspace\16f88\AlbertBlanco\main.asm
+             _.org_1_0099   0x000099    program     static E:\MPLAB_Workspace\16f88\AlbertBlanco\main.asm
+                  tablaXX   0x0000a0    program     static E:\MPLAB_Workspace\16f88\AlbertBlanco\main.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                   INICIO   0x000005    program     static E:\MPLAB_Workspace\16f88\AlbertBlanco\main.asm
+                     Loop   0x000016    program     static E:\MPLAB_Workspace\16f88\AlbertBlanco\main.asm
+             _.org_1_002D   0x00002d    program     static E:\MPLAB_Workspace\16f88\AlbertBlanco\main.asm
+             _.org_1_002F   0x00002f    program     static E:\MPLAB_Workspace\16f88\AlbertBlanco\main.asm
+             _.org_1_0047   0x000047    program     static E:\MPLAB_Workspace\16f88\AlbertBlanco\main.asm
+             _.org_1_0049   0x000049    program     static E:\MPLAB_Workspace\16f88\AlbertBlanco\main.asm
+             _.org_1_0061   0x000061    program     static E:\MPLAB_Workspace\16f88\AlbertBlanco\main.asm
+             _.org_1_0063   0x000063    program     static E:\MPLAB_Workspace\16f88\AlbertBlanco\main.asm
+             _.org_1_007B   0x00007b    program     static E:\MPLAB_Workspace\16f88\AlbertBlanco\main.asm
+             _.org_1_007D   0x00007d    program     static E:\MPLAB_Workspace\16f88\AlbertBlanco\main.asm
+                    Envia   0x000093    program     static E:\MPLAB_Workspace\16f88\AlbertBlanco\main.asm
+                 EnviaBit   0x000096    program     static E:\MPLAB_Workspace\16f88\AlbertBlanco\main.asm
+             _.org_1_0097   0x000097    program     static E:\MPLAB_Workspace\16f88\AlbertBlanco\main.asm
+             _.org_1_0099   0x000099    program     static E:\MPLAB_Workspace\16f88\AlbertBlanco\main.asm
+                  tablaXX   0x0000a0    program     static E:\MPLAB_Workspace\16f88\AlbertBlanco\main.asm
+          ALBERT_BLANCO_1   0x00011e    program     static E:\MPLAB_Workspace\16f88\AlbertBlanco\main.asm
+          ALBERT_BLANCO_2   0x00012e    program     static E:\MPLAB_Workspace\16f88\AlbertBlanco\main.asm
+                    U_E_1   0x00013e    program     static E:\MPLAB_Workspace\16f88\AlbertBlanco\main.asm
+                    U_E_2   0x000151    program     static E:\MPLAB_Workspace\16f88\AlbertBlanco\main.asm
+                    ED2_1   0x000164    program     static E:\MPLAB_Workspace\16f88\AlbertBlanco\main.asm
+                    ED2_2   0x00017d    program     static E:\MPLAB_Workspace\16f88\AlbertBlanco\main.asm
+                     LM_1   0x000196    program     static E:\MPLAB_Workspace\16f88\AlbertBlanco\main.asm
+                     LM_2   0x0001a4    program     static E:\MPLAB_Workspace\16f88\AlbertBlanco\main.asm
+                   Jhon_1   0x0001b2    program     static E:\MPLAB_Workspace\16f88\AlbertBlanco\main.asm
+                   Jhon_2   0x0001c3    program     static E:\MPLAB_Workspace\16f88\AlbertBlanco\main.asm
+
+

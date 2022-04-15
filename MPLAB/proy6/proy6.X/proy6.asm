@@ -1,0 +1,173 @@
+#include "p16f886.inc"
+
+; CONFIG1
+; __config 0xE0F1
+ __CONFIG _CONFIG1, _FOSC_XT & _WDTE_OFF & _PWRTE_OFF & _MCLRE_ON & _CP_OFF & _CPD_OFF & _BOREN_OFF & _IESO_OFF & _FCMEN_OFF & _LVP_OFF
+; CONFIG2
+; __config 0xFFFF
+ __CONFIG _CONFIG2, _BOR4V_BOR40V & _WRT_OFF
+
+ #DEFINE SR PORTA,0
+ #DEFINE DS PORTA,1
+ #DEFINE CL PORTA,2
+ #DEFINE ST PORTA,3
+ CBLOCK 0x20
+    UN,DN,CN,NA,NB,NUM,DATO,AUX
+ ENDC
+
+ ORG  0X00  ; Aquí comienza el micro.- 
+ GOTO  INICIO ; Salto a inicio de mi programa.- 
+ ORG	0x04						; Service interrupt starts here. 
+
+; CONTEXT SAVING				
+;**************************************************************************************************************
+					; Clear PCLATH for the ISR.
+
+    BTFSS		INTCON, RBIE	
+
+    RETFIE
+
+ ORG  0X05  ; Origen del código de programa.- 
+
+
+CLAVE
+  ADDWF PCL,1    
+  DT 0X70,0X00,0X5B,0X4F,0X66,0X6D,0X7D,0X07,0X7F,0X6F
+
+ TABLA
+    ADDWF PCL,1    
+    DT 0X3F,0X06,0X5B,0X4F,0X66,0X6D,0X7D,0X07,0X7F,0X6F
+
+ INICIO
+    BANKSEL TRISA
+    MOVLW .1
+    MOVWF TRISA
+    MOVLW .240  ; rb7(c3 c2 c1 c0(rb4))  - rb0(f3 f2 f1 f0)
+    MOVWF TRISB
+    MOVLW .0  ;
+    MOVWF OPTION_REG
+    MOVLW .0
+    MOVWF TRISC
+    MOVLW .136
+    MOVWF INTCON
+    BANKSEL ANSEL
+    CLRF ANSEL
+    CLRF ANSELH
+    BANKSEL PORTA
+    MOVLW .15
+    MOVWF PORTB
+
+ BUCLE:
+    BCF AUX,0
+    MOVFW PORTB
+    MOVWF NA
+    MOVFW PORTC
+    MOVWF NB
+    BTFSC SR
+    GOTO RESTA
+    MOVFW NA
+    ADDWF NB,0
+    MOVWF NUM
+    BTFSS STATUS,C
+    GOTO $+017
+    CALL EXTRAE 
+    MOVLW .6
+    ADDWF UN,1
+    MOVFW UN
+    SUBLW .9
+    BTFSC STATUS,C
+    GOTO $+4
+    INCF DN,1
+    MOVLW .10
+    SUBWF UN,1
+    MOVLW .5
+    ADDWF DN,1
+    MOVFW DN
+    SUBLW .9
+    BTFSC STATUS,C
+    GOTO $+4
+    INCF CN,1
+    MOVLW .10
+    SUBWF DN,1
+    MOVLW .2
+    ADDWF CN,1
+    GOTO MOSTRAR
+    CALL EXTRAE
+    GOTO MOSTRAR
+
+ RESTA
+    MOVFW NA
+    SUBWF NB,0
+    BTFSC STATUS,C
+    GOTO $+3
+    MOVFW NB
+    SUBWF NA,0
+    MOVWF NUM
+    CALL EXTRAE
+    GOTO MOSTRAR
+
+ EXTRAE
+    CLRF UN
+    CLRF DN
+    CLRF CN
+    MOVFW NUM
+    SUBLW .99
+    BTFSC STATUS,C
+    GOTO $+5
+    MOVLW .100
+    SUBWF NUM,1
+    INCF CN,1
+    GOTO $-7
+    MOVFW NUM
+    SUBLW .9
+    BTFSC STATUS,C
+    GOTO $+5
+    MOVLW .10
+    SUBWF NUM,1
+    INCF DN,1
+    GOTO $-7
+    MOVFW NUM
+    MOVWF UN
+    RETURN
+
+ MOSTRAR
+    MOVFW UN
+    CALL TABLA
+    MOVWF DATO
+    CALL ENVIA
+    MOVFW DN
+    CALL TABLA
+    MOVWF DATO
+    CALL ENVIA
+    MOVFW CN
+    CALL TABLA
+    MOVWF DATO
+    CALL ENVIA
+    BCF ST
+    NOP
+    BSF ST
+    GOTO BUCLE
+
+ ENVIA
+    MOVLW .8
+    MOVWF AUX
+    BTFSS DATO,7
+    GOTO $+3
+    BSF DS
+    GOTO $+2
+    BCF DS
+    BCF CL
+    NOP
+    BSF CL
+    RLF DATO,1
+    DECFSZ AUX
+    GOTO $-0A
+    RETURN
+
+
+    END
+
+
+
+
+

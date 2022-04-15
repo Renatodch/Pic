@@ -1,0 +1,1182 @@
+MPASM  5.51                          MAIN.ASM   10-6-2018  10:42:38         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Warning[205]: Found directive in column 1. (LIST)
+                      00001 LIST    P=16F88
+                      00002 #include "p16f88.inc"
+                      00001         LIST
+                      00002 
+                      00003 ;==========================================================================
+                      00004 ;  MPASM PIC16F88 processor include
+                      00005 ; 
+                      00006 ;  (c) Copyright 1999-2013 Microchip Technology, All rights reserved
+                      00007 ;==========================================================================
+                      00008 
+Message[301]: MESSAGE: (Processor-header file mismatch.  Verify selected processor.)
+                      00549         LIST
+                      00003 #include "Macros.inc"
+Warning[205]: Found directive in column 1. (CBLOCK)
+                      00001 CBLOCK 0x40
+Warning[210]: Extra ","
+  00000040            00002 C5,
+Warning[210]: Extra ","
+  00000041            00003 C6,
+Warning[210]: Extra ","
+  00000042            00004 C7,
+Warning[205]: Found directive in column 1. (ENDC)
+                      00005 ENDC
+                      00006 
+                      00007 LOAD MACRO Reg,Val
+                      00008         movlw Val
+                      00009         movwf Reg
+                      00010         ENDM
+                      00011 
+                      00012         
+                      00013 Delay MACRO val
+                      00014         LOAD C1,val
+                      00015         LOAD C2,0xff    ; Iniciamos contador2 
+                      00016         decfsz C2,1    ; Decrementa Contador2 y si es 0 sale.-     
+                      00017         goto $-1       ; Si no es 0 repetimos ciclo.- 
+                      00018         decfsz C1,1    ; Decrementa Contador1.- 
+                      00019         goto $-4    ; Si no es cero repetimos ciclo.- 
+                      00020         ENDM
+                      00021 
+                      00022 Print MACRO i
+                      00023         movlw 0xF0
+                      00024         andwf PORTB
+                      00025         movf i,0
+                      00026         call msg  
+                      00027         movwf temp ; actual
+                      00028         movlw 0x0F
+                      00029         andwf temp,0
+                      00030         iorwf PORTB,1
+                      00031         
+                      00032         movf i,0
+                      00033         call msg
+                      00034         movwf temp
+MPASM  5.51                          MAIN.ASM   10-6-2018  10:42:38         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00035         movlw 0x70
+                      00036         andwf temp,1
+                      00037         rrf temp
+                      00038         rrf temp
+                      00039         rrf temp
+                      00040         rrf temp
+                      00041         movlw 0xF8
+                      00042         andwf PORTA
+                      00043         movf temp,0
+                      00044         iorwf PORTA,1
+                      00045 
+Warning[205]: Found directive in column 1. (ENDM)
+                      00046 ENDM
+                      00004 
+2007   3F29           00005  __CONFIG _CONFIG1, _FOSC_XT & _WDTE_OFF & _PWRTE_OFF & _MCLRE_ON & _CP_OFF & _CPD_OFF & _BODEN_OFF & _L
+                            VP_OFF
+2008   3FFC           00006  __CONFIG _CONFIG2, _IESO_OFF  & _FCMEN_OFF
+                      00007  
+                      00008 #DEFINE SH PORTA,1
+                      00009 #DEFINE DS PORTA,0
+                      00010 #DEFINE ST PORTA,2
+                      00011 
+  00000000            00012 start_DIG_1 equ 0x00    ; .0
+  0000000A            00013 start_DIG_2 equ 0x0A    ; .10
+  00000064            00014 start_DIG_3 equ 0x64    ; .100
+  000003E8            00015 start_DIG_4 equ 0x3E8   ; .1000
+                      00016 
+  00000000            00017 Inc_DIG_1 equ 0x00      ; .0
+  00000006            00018 Inc_DIG_2 equ 0x06      ; .6
+  0000009C            00019 Inc_DIG_3 equ 0x9C      ; .156
+                      00020 
+  00000C18            00021 Inc_DIG_4 equ 0xC18     ; .3096
+  00000018            00022 Inc_DIG_4_L equ 0x18    
+  0000000C            00023 Inc_DIG_4_H equ 0x0C    
+                      00024 
+Warning[205]: Found directive in column 1. (CBLOCK)
+                      00025 CBLOCK 0x20
+  00000020            00026     C1,C2,CUENTA,dato,bit,ABC
+Warning[205]: Found directive in column 1. (ENDC)
+                      00027 ENDC
+Warning[205]: Found directive in column 1. (CBLOCK)
+                      00028 CBLOCK 0x40
+  00000040            00029         htemp,ltemp,Digi0,Digi1,Digi2,Digi3
+Warning[205]: Found directive in column 1. (ENDC)
+                      00030 ENDC
+Warning[205]: Found directive in column 1. (CBLOCK)
+                      00031 CBLOCK 0x60
+  00000060            00032         _U,_D,_C,_M,temp2,temp,val,Num_H,Num_L
+                      00033 
+Warning[205]: Found directive in column 1. (ENDC)
+                      00034 ENDC
+                      00035 
+Warning[205]: Found directive in column 1. (ORG)
+MPASM  5.51                          MAIN.ASM   10-6-2018  10:42:38         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00036 ORG  0X00  
+Warning[203]: Found opcode in column 1. (GOTO)
+0000   2???           00037 GOTO  INICIO 
+Warning[205]: Found directive in column 1. (ORG)
+                      00038 ORG  0x04  
+                      00039     
+0004                  00040 INICIO
+                      00041 
+Warning[205]: Found directive in column 1. (BANKSEL)
+0004   1683 1303      00042 BANKSEL TRISA
+Warning[206]: Found call to macro in column 1. (LOAD)
+                      00043 LOAD TRISA,0x18 
+0006   3018               M         movlw 0x18
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0007   0085               M         movwf TRISA
+Warning[206]: Found call to macro in column 1. (LOAD)
+                      00044 LOAD TRISB,0xF8 
+0008   30F8               M         movlw 0xF8
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0009   0086               M         movwf TRISB
+                      00045 
+Warning[205]: Found directive in column 1. (BANKSEL)
+000A   1683 1303      00046 BANKSEL ANSEL
+Warning[203]: Found opcode in column 1. (CLRF)
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+000C   019B           00047 CLRF ANSEL
+                      00048 
+Warning[205]: Found directive in column 1. (BANKSEL)
+000D   1283 1303      00049 BANKSEL PORTA
+Warning[203]: Found opcode in column 1. (CLRF)
+000F   0186           00050 CLRF PORTB
+Warning[203]: Found opcode in column 1. (CLRF)
+0010   0185           00051 CLRF PORTA
+                      00052 
+                      00053 
+0011                  00054 Loop ;##################################### BUCLE ############################
+                      00055         ;sub_process
+                      00056         ;bcf PCLATH,1
+                      00057         ;bsf PCLATH,0
+                      00058 
+0011   01E5           00059         clrf temp
+0012   01A5           00060         clrf ABC
+                      00061 ;Leyendo nibble H
+0013   0806           00062         movf PORTB,0
+0014   3938           00063         andlw 0x38   ;0Y111000
+0015   00E5           00064         movwf temp
+0016   1003           00065         bcf STATUS,C
+Message[305]: Using default destination of 1 (file).
+0017   0CE5           00066         rrf temp
+Message[305]: Using default destination of 1 (file).
+0018   0CE5           00067         rrf temp
+Message[305]: Using default destination of 1 (file).
+0019   0CE5           00068         rrf temp
+MPASM  5.51                          MAIN.ASM   10-6-2018  10:42:38         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+001A   0865           00069         movf temp,0
+001B   00E7           00070         movwf Num_H
+001C   0806           00071         movf PORTB,0
+001D   3980           00072         andlw 0x80 ;1Y000000
+001E   00E5           00073         movwf temp
+Message[305]: Using default destination of 1 (file).
+001F   0EE5           00074         swapf temp
+0020   0865           00075         movf temp,0
+Message[305]: Using default destination of 1 (file).
+0021   06E7           00076         xorwf Num_H     
+                      00077         
+                      00078 
+                      00079 ;Leyendo nibble L
+                      00080 
+0022   3008           00081         movlw .8
+0023   00A5           00082         movwf ABC
+                      00083 
+0024                  00084 READING_MUX
+                      00085 
+0024   03A5           00086         decf ABC,1      
+                      00087 
+                      00088 
+0025   0825           00089         movf ABC,0
+0026   0086           00090         movwf PORTB
+                      00091         Delay .1        
+                          M         LOAD C1,.1
+0027   3001               M         movlw .1
+0028   00A0               M         movwf C1
+                          M         LOAD C2,0xff    ; Iniciamos contador2 
+0029   30FF               M         movlw 0xff
+002A   00A1               M         movwf C2
+002B   0BA1               M         decfsz C2,1    ; Decrementa Contador2 y si es 0 sale.-     
+002C   2???               M         goto $-1       ; Si no es 0 repetimos ciclo.- 
+002D   0BA0               M         decfsz C1,1    ; Decrementa Contador1.- 
+002E   2???               M         goto $-4    ; Si no es cero repetimos ciclo.- 
+002F   1F06           00092         btfss PORTB,6
+0030   2???           00093         goto LOW_N      
+0031   1468           00094         bsf Num_L,0
+0032   2???           00095         goto _R
+0033                  00096 LOW_N
+0033   1068           00097         bcf Num_L,0
+0034                  00098 _R
+                      00099 
+0034   3000           00100         movlw .0
+0035   1103           00101         bcf STATUS,Z
+0036   0625           00102         xorwf ABC,0
+0037   1D03           00103         btfss STATUS,Z
+0038   2???           00104         goto rotate
+0039   2???           00105         goto _Ci
+003A                  00106 rotate
+Message[305]: Using default destination of 1 (file).
+003A   0DE8           00107         rlf Num_L
+003B   2???           00108         goto READING_MUX
+MPASM  5.51                          MAIN.ASM   10-6-2018  10:42:38         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00109         
+003C                  00110 _Ci     ;################################ Num_H  Num_L rdy#########################3
+003C   0868           00111         movf Num_L,0
+003D   00C1           00112         movwf ltemp
+003E   0867           00113         movf Num_H,0
+003F   00C0           00114         movwf htemp
+                      00115 
+                      00116 ;##### determinar incrementos
+                      00117 
+0040                  00118 Process
+                      00119 
+                      00120 ;################### determina el numero 
+                      00121 
+0040   0841           00122         movf ltemp,0
+0041   00E5           00123         movwf temp      
+0042   0840           00124         movf htemp,0
+0043   00E4           00125         movwf temp2     
+                      00126 
+                      00127 ;#########################################
+                      00128 
+0044                  00129 Determina_M
+                      00130                                   ;0x06  0x9C  0xC18
+                      00131                                   ;0x0A  0x64  0x3E8
+0044   3003           00132         movlw 0x03
+0045   1003           00133         bcf STATUS,C
+0046   02E4           00134         subwf temp2,1
+0047   1C03           00135         btfss STATUS,C    
+0048   2???           00136                 goto Determina_C_1  ;si  desborda
+                      00137         
+Warning[207]: Found label after column 1. (check_low)
+0049                  00138         check_low
+0049   30E8           00139         movlw 0xE8    
+004A   1003           00140         bcf STATUS,C
+004B   02E5           00141         subwf temp,1
+004C   1C03           00142         btfss STATUS,C    
+004D   2???           00143                 goto check_c                    ;si esta entre 0-9 xq desborda
+Message[305]: Using default destination of 1 (file).
+004E   0AE3           00144         incf _M                                 ; incrementa por cada vez que resta 0x0A
+004F   2???           00145         goto Determina_M
+                      00146         
+Warning[207]: Found label after column 1. (check_c)
+0050                  00147         check_c
+0050   3001           00148                 movlw 0x1    
+0051   1003           00149                 bcf STATUS,C
+0052   02E4           00150                 subwf temp2,1
+0053   1C03           00151                 btfss STATUS,C 
+0054   2???           00152                         goto Determina_C_1  ; se desborda??
+Message[305]: Using default destination of 1 (file).
+0055   0AE3           00153                 incf _M
+0056   2???           00154                 goto Determina_M
+                      00155 
+0057                  00156 Determina_C_1
+0057   3000           00157         movlw .0
+MPASM  5.51                          MAIN.ASM   10-6-2018  10:42:38         PAGE  6
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0058   1103           00158         bcf STATUS,Z
+0059   0663           00159         xorwf _M,0
+005A   1903           00160         btfsc STATUS,Z
+005B   2???           00161         goto noupdate
+                      00162 
+005C   3003           00163         movlw .3
+Message[305]: Using default destination of 1 (file).
+005D   07E4           00164         addwf temp2
+                      00165 
+005E   0865           00166         movf temp,0
+005F   00C1           00167         movwf ltemp
+                      00168 
+0060   2???           00169         goto Determina_C
+                      00170 
+0061                  00171 noupdate
+0061   0840           00172         movf htemp,0
+0062   00E4           00173         movwf temp2     
+0063   0841           00174         movf ltemp,0
+0064   00E5           00175         movwf temp
+                      00176 
+0065                  00177 Determina_C
+                      00178 
+0065   3064           00179         movlw 0x64
+0066   1003           00180         bcf STATUS,C
+0067   02E5           00181         subwf temp,1
+0068   1C03           00182         btfss STATUS,C    
+0069   2???           00183                 goto check_h_c          ;si  desborda
+                      00184         
+Message[305]: Using default destination of 1 (file).
+006A   0AE2           00185         incf _C
+006B   2???           00186         goto Determina_C
+                      00187 
+Warning[207]: Found label after column 1. (check_h_c)
+006C                  00188         check_h_c 
+006C   3001           00189                 movlw 0x1    
+006D   1003           00190                 bcf STATUS,C
+Message[305]: Using default destination of 1 (file).
+006E   02E4           00191                 subwf temp2
+006F   1C03           00192                 btfss STATUS,C 
+0070   2???           00193                         goto Determina_D_1 ; se desborda??
+Message[305]: Using default destination of 1 (file).
+0071   0AE2           00194                 incf _C
+0072   2???           00195                 goto Determina_C
+                      00196 
+0073                  00197 Determina_D_1
+0073   3000           00198         movlw .0
+0074   1103           00199         bcf STATUS,Z
+0075   0662           00200         xorwf _C,0
+0076   1903           00201         btfsc STATUS,Z
+0077   2???           00202         goto noupdate_2
+0078   3064           00203         movlw 0x64
+Message[305]: Using default destination of 1 (file).
+0079   07E5           00204         addwf temp
+MPASM  5.51                          MAIN.ASM   10-6-2018  10:42:38         PAGE  7
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00205 
+007A   2???           00206         goto Determina_D
+                      00207 
+007B                  00208 noupdate_2
+007B   0841           00209         movf ltemp,0
+007C   00E5           00210         movwf temp
+                      00211 
+007D                  00212 Determina_D
+                      00213         
+007D   300A           00214         movlw 0x0A
+007E   1003           00215         bcf STATUS,C
+007F   02E5           00216         subwf temp,1
+0080   1C03           00217         btfss STATUS,C    
+0081   2???           00218                 goto Determina_U_1  ;si  desborda
+Message[305]: Using default destination of 1 (file).
+0082   0AE1           00219         incf _D
+0083   2???           00220         goto Determina_D
+                      00221 
+0084                  00222 Determina_U_1 
+0084   3000           00223         movlw .0
+0085   1103           00224         bcf STATUS,Z
+0086   0661           00225         xorwf _D,0
+0087   1903           00226         btfsc STATUS,Z
+0088   2???           00227         goto noupdate_3
+0089   300A           00228         movlw 0x0A
+Message[305]: Using default destination of 1 (file).
+008A   07E5           00229         addwf temp
+008B   2???           00230         goto Determina_U
+                      00231 
+008C                  00232 noupdate_3
+008C   0841           00233         movf ltemp,0
+008D   00E5           00234         movwf temp
+                      00235 
+008E                  00236 Determina_U
+                      00237 
+008E   0865           00238         movf temp,0     
+008F   00E0           00239         movwf _U
+                      00240 
+0090   0860           00241         movf _U,0   
+0091   00C2           00242                 movwf Digi0
+0092   0861           00243         movf _D,0   
+0093   00C3           00244                 movwf Digi1
+0094   0862           00245         movf _C,0   
+0095   00C4           00246                 movwf Digi2
+0096   0863           00247         movf _M,0   
+0097   00C5           00248                 movwf Digi3
+                      00249 
+                      00250 
+0098                  00251 _End ;################### END ###############
+                      00252 
+Warning[203]: Found opcode in column 1. (clrf)
+0098   01E0           00253 clrf _U
+Warning[203]: Found opcode in column 1. (clrf)
+MPASM  5.51                          MAIN.ASM   10-6-2018  10:42:38         PAGE  8
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0099   01E1           00254 clrf _D
+Warning[203]: Found opcode in column 1. (clrf)
+009A   01E2           00255 clrf _C
+Warning[203]: Found opcode in column 1. (clrf)
+009B   01E3           00256 clrf _M
+Warning[203]: Found opcode in column 1. (clrf)
+009C   01E4           00257 clrf temp2
+Warning[203]: Found opcode in column 1. (clrf)
+009D   01E5           00258 clrf temp
+Warning[203]: Found opcode in column 1. (bcf)
+009E   1003           00259 bcf STATUS,C
+                      00260 
+Warning[203]: Found opcode in column 1. (movf)
+009F   0805           00261 movf PORTA,0
+Warning[203]: Found opcode in column 1. (andlw)
+00A0   3918           00262 andlw 0x18
+Warning[203]: Found opcode in column 1. (movwf)
+00A1   00E5           00263 movwf temp
+Warning[203]: Found opcode in column 1. (rrf)
+Message[305]: Using default destination of 1 (file).
+00A2   0CE5           00264 rrf temp
+Warning[203]: Found opcode in column 1. (rrf)
+Message[305]: Using default destination of 1 (file).
+00A3   0CE5           00265 rrf temp
+Warning[203]: Found opcode in column 1. (rrf)
+Message[305]: Using default destination of 1 (file).
+00A4   0CE5           00266 rrf temp
+                      00267 ;#################### Selecciona Digito ################
+00A5                  00268 None
+Warning[203]: Found opcode in column 1. (movlw)
+00A5   3000           00269 movlw .0
+Warning[203]: Found opcode in column 1. (bcf)
+00A6   1103           00270 bcf STATUS,Z
+Warning[203]: Found opcode in column 1. (xorwf)
+00A7   0665           00271 xorwf temp,0
+Warning[203]: Found opcode in column 1. (btfss)
+00A8   1D03           00272 btfss STATUS,Z
+Warning[203]: Found opcode in column 1. (goto)
+00A9   2???           00273 goto S0
+00AA   0842           00274         movf Digi0,0
+Warning[203]: Found opcode in column 1. (goto)
+00AB   2???           00275 goto Show
+00AC                  00276 S0
+Warning[203]: Found opcode in column 1. (movlw)
+00AC   3001           00277 movlw .1
+Warning[203]: Found opcode in column 1. (bcf)
+00AD   1103           00278 bcf STATUS,Z
+Warning[203]: Found opcode in column 1. (xorwf)
+00AE   0665           00279 xorwf temp,0
+Warning[203]: Found opcode in column 1. (btfss)
+00AF   1D03           00280 btfss STATUS,Z
+Warning[203]: Found opcode in column 1. (goto)
+00B0   2???           00281 goto S1
+MPASM  5.51                          MAIN.ASM   10-6-2018  10:42:38         PAGE  9
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+00B1   0843           00282         movf Digi1,0
+Warning[203]: Found opcode in column 1. (goto)
+00B2   2???           00283 goto Show
+00B3                  00284 S1
+Warning[203]: Found opcode in column 1. (movlw)
+00B3   3002           00285 movlw .2
+Warning[203]: Found opcode in column 1. (bcf)
+00B4   1103           00286 bcf STATUS,Z
+Warning[203]: Found opcode in column 1. (xorwf)
+00B5   0665           00287 xorwf temp,0
+Warning[203]: Found opcode in column 1. (btfss)
+00B6   1D03           00288 btfss STATUS,Z
+Warning[203]: Found opcode in column 1. (goto)
+00B7   2???           00289 goto s1S0
+00B8   0844           00290         movf Digi2,0
+Warning[203]: Found opcode in column 1. (goto)
+00B9   2???           00291 goto Show
+00BA                  00292 s1S0
+00BA   0845           00293         movf Digi3,0
+                      00294 
+00BB                  00295 Show
+00BB   108A           00296         bcf PCLATH,1
+00BC   140A           00297         bsf PCLATH,0
+                      00298 
+00BD   2???           00299         call NUMEROS
+                      00300 
+                      00301 
+00BE   108A           00302         bcf PCLATH,1
+00BF   100A           00303         bcf PCLATH,0
+                      00304 
+00C0   2???           00305         call Envia      
+                      00306 
+Warning[203]: Found opcode in column 1. (GOTO)
+00C1   2???           00307 GOTO Loop
+                      00308 
+                      00309 
+                      00310 ;####################################################################
+00C2                  00311 Envia
+Warning[203]: Found opcode in column 1. (movwf)
+00C2   00A3           00312 movwf dato
+Warning[203]: Found opcode in column 1. (movlw)
+00C3   3008           00313 movlw d'8'      ; Número de bits a transmitir.
+Warning[203]: Found opcode in column 1. (movwf)
+00C4   00A4           00314 movwf bit
+                      00315         
+00C5                  00316 EnviaBit              ; Comienza a enviar datos.
+Warning[203]: Found opcode in column 1. (btfss)
+00C5   1FA3           00317 btfss dato,7  ; ¿Es un "1" el bit a transmitir?
+Warning[203]: Found opcode in column 1. (goto)
+00C6   2???           00318 goto $+3
+Warning[203]: Found opcode in column 1. (bsf)
+00C7   1405           00319 bsf DS    ; Si, Transmite un "1".
+Warning[203]: Found opcode in column 1. (goto)
+MPASM  5.51                          MAIN.ASM   10-6-2018  10:42:38         PAGE 10
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+00C8   2???           00320 goto $+2
+Warning[203]: Found opcode in column 1. (bcf)
+00C9   1005           00321 bcf DS    ; No, pues envía un "0".
+Warning[203]: Found opcode in column 1. (bcf)
+00CA   1085           00322 bcf SH  ; Clock=0.
+Warning[203]: Found opcode in column 1. (bsf)
+00CB   1485           00323 bsf SH  ; Clock=1.
+                      00324 
+Warning[203]: Found opcode in column 1. (rlf)
+00CC   0DA3           00325 rlf dato,1  ; Rota para envia siguiente bit.-
+Warning[203]: Found opcode in column 1. (decfsz)
+00CD   0BA4           00326 decfsz bit,1    ; Comprueba si es el último bit. 7,6,5,4,3,2,1,0
+Warning[203]: Found opcode in column 1. (goto)
+00CE   2???           00327 goto EnviaBit    ; No es el último bit repite la operación.     
+Warning[203]: Found opcode in column 1. (bcf)
+00CF   1105           00328 bcf ST
+Warning[203]: Found opcode in column 1. (bsf)
+00D0   1505           00329 bsf ST
+Warning[203]: Found opcode in column 1. (return)
+00D1   0008           00330 return 
+                      00331 
+00D2                  00332 N
+Warning[203]: Found opcode in column 1. (addwf)
+Message[305]: Using default destination of 1 (file).
+00D2   0782           00333 addwf PCL
+Warning[203]: Found opcode in column 1. (retlw)
+00D3   3400           00334 retlw 0x00
+Warning[203]: Found opcode in column 1. (retlw)
+00D4   3400           00335 retlw 0x00
+Warning[203]: Found opcode in column 1. (retlw)
+00D5   3400           00336 retlw 0x00
+Warning[203]: Found opcode in column 1. (retlw)
+00D6   3400           00337 retlw 0x00
+Warning[203]: Found opcode in column 1. (retlw)
+00D7   3400           00338 retlw 0x00
+Warning[203]: Found opcode in column 1. (retlw)
+00D8   3400           00339 retlw 0x00
+Warning[203]: Found opcode in column 1. (retlw)
+00D9   3400           00340 retlw 0x00
+Warning[203]: Found opcode in column 1. (retlw)
+00DA   3400           00341 retlw 0x00
+Warning[203]: Found opcode in column 1. (retlw)
+00DB   3400           00342 retlw 0x00
+Warning[203]: Found opcode in column 1. (retlw)
+00DC   3400           00343 retlw 0x00
+Warning[203]: Found opcode in column 1. (retlw)
+00DD   3400           00344 retlw 0x00
+Warning[203]: Found opcode in column 1. (retlw)
+00DE   3400           00345 retlw 0x00
+Warning[203]: Found opcode in column 1. (retlw)
+00DF   3400           00346 retlw 0x00
+Warning[203]: Found opcode in column 1. (retlw)
+00E0   3400           00347 retlw 0x00
+MPASM  5.51                          MAIN.ASM   10-6-2018  10:42:38         PAGE 11
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Warning[203]: Found opcode in column 1. (retlw)
+00E1   3400           00348 retlw 0x00
+Warning[203]: Found opcode in column 1. (retlw)
+00E2   3400           00349 retlw 0x00
+Warning[203]: Found opcode in column 1. (retlw)
+00E3   3400           00350 retlw 0x00
+Warning[203]: Found opcode in column 1. (retlw)
+00E4   3400           00351 retlw 0x00
+Warning[203]: Found opcode in column 1. (retlw)
+00E5   3400           00352 retlw 0x00
+Warning[203]: Found opcode in column 1. (retlw)
+00E6   3400           00353 retlw 0x00
+Warning[203]: Found opcode in column 1. (retlw)
+00E7   3400           00354 retlw 0x00
+Warning[203]: Found opcode in column 1. (retlw)
+00E8   3400           00355 retlw 0x00
+Warning[203]: Found opcode in column 1. (retlw)
+00E9   3400           00356 retlw 0x00
+Warning[203]: Found opcode in column 1. (retlw)
+00EA   3400           00357 retlw 0x00
+Warning[203]: Found opcode in column 1. (retlw)
+00EB   3400           00358 retlw 0x00
+Warning[203]: Found opcode in column 1. (retlw)
+00EC   3400           00359 retlw 0x00
+Warning[203]: Found opcode in column 1. (retlw)
+00ED   3400           00360 retlw 0x00
+Warning[203]: Found opcode in column 1. (retlw)
+00EE   3400           00361 retlw 0x00
+Warning[203]: Found opcode in column 1. (retlw)
+00EF   3400           00362 retlw 0x00
+Warning[203]: Found opcode in column 1. (retlw)
+00F0   3400           00363 retlw 0x00
+Warning[203]: Found opcode in column 1. (retlw)
+00F1   3400           00364 retlw 0x00
+Warning[203]: Found opcode in column 1. (retlw)
+00F2   3400           00365 retlw 0x00
+Warning[203]: Found opcode in column 1. (retlw)
+00F3   3400           00366 retlw 0x00
+Warning[203]: Found opcode in column 1. (retlw)
+00F4   3400           00367 retlw 0x00
+Warning[203]: Found opcode in column 1. (retlw)
+00F5   3400           00368 retlw 0x00
+Warning[203]: Found opcode in column 1. (retlw)
+00F6   3400           00369 retlw 0x00
+Warning[203]: Found opcode in column 1. (retlw)
+00F7   3400           00370 retlw 0x00
+Warning[203]: Found opcode in column 1. (retlw)
+00F8   3400           00371 retlw 0x00
+Warning[203]: Found opcode in column 1. (retlw)
+00F9   3400           00372 retlw 0x00
+Warning[203]: Found opcode in column 1. (retlw)
+00FA   3400           00373 retlw 0x00
+Warning[203]: Found opcode in column 1. (retlw)
+MPASM  5.51                          MAIN.ASM   10-6-2018  10:42:38         PAGE 12
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+00FB   3400           00374 retlw 0x00
+Warning[203]: Found opcode in column 1. (retlw)
+00FC   3400           00375 retlw 0x00
+Warning[203]: Found opcode in column 1. (retlw)
+00FD   3400           00376 retlw 0x00
+Warning[203]: Found opcode in column 1. (retlw)
+00FE   3400           00377 retlw 0x00
+Warning[203]: Found opcode in column 1. (retlw)
+00FF   3400           00378 retlw 0x00
+Warning[203]: Found opcode in column 1. (retlw)
+0100   3400           00379 retlw 0x00
+Warning[203]: Found opcode in column 1. (retlw)
+0101   3400           00380 retlw 0x00
+Warning[203]: Found opcode in column 1. (retlw)
+0102   3400           00381 retlw 0x00
+Warning[203]: Found opcode in column 1. (retlw)
+0103   3400           00382 retlw 0x00
+Warning[203]: Found opcode in column 1. (retlw)
+0104   3400           00383 retlw 0x00
+Warning[203]: Found opcode in column 1. (retlw)
+0105   3400           00384 retlw 0x00
+Warning[203]: Found opcode in column 1. (retlw)
+0106   3400           00385 retlw 0x00
+Warning[203]: Found opcode in column 1. (retlw)
+0107   3400           00386 retlw 0x00
+Warning[203]: Found opcode in column 1. (retlw)
+0108   3400           00387 retlw 0x00
+Warning[203]: Found opcode in column 1. (retlw)
+0109   3400           00388 retlw 0x00
+                      00389 
+010A                  00390 NUMEROS
+Warning[203]: Found opcode in column 1. (addwf)
+Message[305]: Using default destination of 1 (file).
+010A   0782           00391 addwf PCL
+Warning[203]: Found opcode in column 1. (retlw)
+010B   343F           00392 retlw 0x3F ;0
+Warning[203]: Found opcode in column 1. (retlw)
+010C   3406           00393 retlw 0X06 ;1
+Warning[203]: Found opcode in column 1. (retlw)
+010D   345B           00394 retlw 0X5B ;2
+Warning[203]: Found opcode in column 1. (retlw)
+010E   344F           00395 retlw 0X4F ;3
+Warning[203]: Found opcode in column 1. (retlw)
+010F   3466           00396 retlw 0X66 ;4
+Warning[203]: Found opcode in column 1. (retlw)
+0110   346D           00397 retlw 0X6D ;5
+Warning[203]: Found opcode in column 1. (retlw)
+0111   347D           00398 retlw 0X7D ;6
+Warning[203]: Found opcode in column 1. (retlw)
+0112   3407           00399 retlw 0X07 ;7
+Warning[203]: Found opcode in column 1. (retlw)
+0113   347F           00400 retlw 0X7F ;8
+Warning[203]: Found opcode in column 1. (retlw)
+MPASM  5.51                          MAIN.ASM   10-6-2018  10:42:38         PAGE 13
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0114   3467           00401 retlw 0X67 ;9
+                      00402 
+                      00403 
+Warning[205]: Found directive in column 1. (END)
+3F29 3FFC             00404 END
+MPASM  5.51                          MAIN.ASM   10-6-2018  10:42:38         PAGE 14
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+ABC                               00000025
+ADCON0                            0000001F
+ADCON1                            0000009F
+ADCS0                             00000006
+ADCS1                             00000007
+ADCS2                             00000006
+ADDEN                             00000003
+ADFM                              00000007
+ADIE                              00000006
+ADIF                              00000006
+ADON                              00000000
+ADRESH                            0000001E
+ADRESL                            0000009E
+ANS0                              00000000
+ANS1                              00000001
+ANS2                              00000002
+ANS3                              00000003
+ANS4                              00000004
+ANS5                              00000005
+ANS6                              00000006
+ANSEL                             0000009B
+BF                                00000000
+BRGH                              00000002
+C                                 00000000
+C1                                00000020
+C1INV                             00000004
+C1OUT                             00000006
+C2                                00000021
+C2INV                             00000005
+C2OUT                             00000007
+C5                                00000040
+C6                                00000041
+C7                                00000042
+CCP1CON                           00000017
+CCP1IE                            00000002
+CCP1IF                            00000002
+CCP1M0                            00000000
+CCP1M1                            00000001
+CCP1M2                            00000002
+CCP1M3                            00000003
+CCP1X                             00000005
+CCP1Y                             00000004
+CCPR1                             00000015
+CCPR1H                            00000016
+CCPR1L                            00000015
+CHS0                              00000003
+CHS1                              00000004
+CHS2                              00000005
+CIS                               00000003
+CKE                               00000006
+CKP                               00000004
+CM0                               00000000
+CM1                               00000001
+MPASM  5.51                          MAIN.ASM   10-6-2018  10:42:38         PAGE 15
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+CM2                               00000002
+CMCON                             0000009C
+CMIE                              00000006
+CMIF                              00000006
+CREN                              00000004
+CSRC                              00000007
+CUENTA                            00000022
+CVR0                              00000000
+CVR1                              00000001
+CVR2                              00000002
+CVR3                              00000003
+CVRCON                            0000009D
+CVREN                             00000007
+CVROE                             00000006
+CVRR                              00000005
+D                                 00000005
+DATA_ADDRESS                      00000005
+DC                                00000001
+DS                                PORTA,0
+D_A                               00000005
+D_NOT_A                           00000005
+Delay                             
+Determina_C                       00000065
+Determina_C_1                     00000057
+Determina_D                       0000007D
+Determina_D_1                     00000073
+Determina_M                       00000044
+Determina_U                       0000008E
+Determina_U_1                     00000084
+Digi0                             00000042
+Digi1                             00000043
+Digi2                             00000044
+Digi3                             00000045
+EEADR                             0000010D
+EEADRH                            0000010F
+EECON1                            0000018C
+EECON2                            0000018D
+EEDATA                            0000010C
+EEDATH                            0000010E
+EEIE                              00000004
+EEIF                              00000004
+EEPGD                             00000007
+Envia                             000000C2
+EnviaBit                          000000C5
+F                                 00000001
+FERR                              00000002
+FREE                              00000004
+FSR                               00000004
+GIE                               00000007
+GO                                00000002
+GO_DONE                           00000002
+GO_NOT_DONE                       00000002
+I2C_DATA                          00000005
+MPASM  5.51                          MAIN.ASM   10-6-2018  10:42:38         PAGE 16
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+I2C_READ                          00000002
+I2C_START                         00000003
+I2C_STOP                          00000004
+INDF                              00000000
+INICIO                            00000004
+INT0IE                            00000004
+INT0IF                            00000001
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+INTF                              00000001
+IOFS                              00000002
+IRCF0                             00000004
+IRCF1                             00000005
+IRCF2                             00000006
+IRP                               00000007
+Inc_DIG_1                         00000000
+Inc_DIG_2                         00000006
+Inc_DIG_3                         0000009C
+Inc_DIG_4                         00000C18
+Inc_DIG_4_H                       0000000C
+Inc_DIG_4_L                       00000018
+LOAD                              
+LOW_N                             00000033
+Loop                              00000011
+N                                 000000D2
+NOT_A                             00000005
+NOT_ADDRESS                       00000005
+NOT_BO                            00000000
+NOT_BOR                           00000000
+NOT_DONE                          00000002
+NOT_PD                            00000003
+NOT_POR                           00000001
+NOT_RBPU                          00000007
+NOT_RC8                           00000006
+NOT_T1SYNC                        00000002
+NOT_TO                            00000004
+NOT_TX8                           00000006
+NOT_W                             00000002
+NOT_WRITE                         00000002
+NUMEROS                           0000010A
+None                              000000A5
+Num_H                             00000067
+Num_L                             00000068
+OERR                              00000001
+OPTION_REG                        00000081
+OSCCON                            0000008F
+OSCTUNE                           00000090
+OSFIE                             00000007
+OSFIF                             00000007
+OSTS                              00000003
+P                                 00000004
+PCL                               00000002
+MPASM  5.51                          MAIN.ASM   10-6-2018  10:42:38         PAGE 17
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+PCLATH                            0000000A
+PCON                              0000008E
+PEIE                              00000006
+PIE1                              0000008C
+PIE2                              0000008D
+PIR1                              0000000C
+PIR2                              0000000D
+PORTA                             00000005
+PORTB                             00000006
+PR2                               00000092
+PS0                               00000000
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+Print                             
+Process                           00000040
+R                                 00000002
+RA0                               00000000
+RA1                               00000001
+RA2                               00000002
+RA3                               00000003
+RA4                               00000004
+RA5                               00000005
+RA6                               00000006
+RA7                               00000007
+RB0                               00000000
+RB1                               00000001
+RB2                               00000002
+RB3                               00000003
+RB4                               00000004
+RB5                               00000005
+RB6                               00000006
+RB7                               00000007
+RBIE                              00000003
+RBIF                              00000000
+RC8_9                             00000006
+RC9                               00000006
+RCD8                              00000000
+RCIE                              00000005
+RCIF                              00000005
+RCREG                             0000001A
+RCSTA                             00000018
+RD                                00000000
+READING_MUX                       00000024
+READ_WRITE                        00000002
+RP0                               00000005
+RP1                               00000006
+RX9                               00000006
+RX9D                              00000000
+R_NOT_W                           00000002
+R_W                               00000002
+S                                 00000003
+S0                                000000AC
+MPASM  5.51                          MAIN.ASM   10-6-2018  10:42:38         PAGE 18
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+S1                                000000B3
+SCS0                              00000000
+SCS1                              00000001
+SH                                PORTA,1
+SMP                               00000007
+SPBRG                             00000099
+SPEN                              00000007
+SREN                              00000005
+SSPADD                            00000093
+SSPBUF                            00000013
+SSPCON                            00000014
+SSPEN                             00000005
+SSPIE                             00000003
+SSPIF                             00000003
+SSPM0                             00000000
+SSPM1                             00000001
+SSPM2                             00000002
+SSPM3                             00000003
+SSPOV                             00000006
+SSPSTAT                           00000094
+ST                                PORTA,2
+STATUS                            00000003
+SWDTE                             00000000
+SWDTEN                            00000000
+SYNC                              00000004
+Show                              000000BB
+T0CS                              00000005
+T0SE                              00000004
+T1CKPS0                           00000004
+T1CKPS1                           00000005
+T1CON                             00000010
+T1INSYNC                          00000002
+T1OSCEN                           00000003
+T1RUN                             00000006
+T2CKPS0                           00000000
+T2CKPS1                           00000001
+T2CON                             00000012
+TMR0                              00000001
+TMR0IE                            00000005
+TMR0IF                            00000002
+TMR1                              0000000E
+TMR1CS                            00000001
+TMR1H                             0000000F
+TMR1IE                            00000000
+TMR1IF                            00000000
+TMR1L                             0000000E
+TMR1ON                            00000000
+TMR2                              00000011
+TMR2IE                            00000001
+TMR2IF                            00000001
+TMR2ON                            00000002
+TOUTPS0                           00000003
+TOUTPS1                           00000004
+MPASM  5.51                          MAIN.ASM   10-6-2018  10:42:38         PAGE 19
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+TOUTPS2                           00000005
+TOUTPS3                           00000006
+TRISA                             00000085
+TRISA0                            00000000
+TRISA1                            00000001
+TRISA2                            00000002
+TRISA3                            00000003
+TRISA4                            00000004
+TRISA5                            00000005
+TRISA6                            00000006
+TRISA7                            00000007
+TRISB                             00000086
+TRISB0                            00000000
+TRISB1                            00000001
+TRISB2                            00000002
+TRISB3                            00000003
+TRISB4                            00000004
+TRISB5                            00000005
+TRISB6                            00000006
+TRISB7                            00000007
+TRMT                              00000001
+TUN0                              00000000
+TUN1                              00000001
+TUN2                              00000002
+TUN3                              00000003
+TUN4                              00000004
+TUN5                              00000005
+TX8_9                             00000006
+TX9                               00000006
+TX9D                              00000000
+TXD8                              00000000
+TXEN                              00000005
+TXIE                              00000004
+TXIF                              00000004
+TXREG                             00000019
+TXSTA                             00000098
+UA                                00000001
+VCFG0                             00000004
+VCFG1                             00000005
+W                                 00000000
+WCOL                              00000007
+WDTCON                            00000105
+WDTPS0                            00000001
+WDTPS1                            00000002
+WDTPS2                            00000003
+WDTPS3                            00000004
+WR                                00000001
+WREN                              00000002
+WRERR                             00000003
+Z                                 00000002
+_.org_1_002C                      0000002C
+_.org_1_002E                      0000002E
+_.org_1_00C6                      000000C6
+MPASM  5.51                          MAIN.ASM   10-6-2018  10:42:38         PAGE 20
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_.org_1_00C8                      000000C8
+_BODEN_OFF                        00003FBF
+_BODEN_ON                         00003FFF
+_BOREN_OFF                        00003FBF
+_BOREN_ON                         00003FFF
+_C                                00000062
+_CCP1_RB0                         00003FFF
+_CCP1_RB3                         00002FFF
+_CCPMX_RB0                        00003FFF
+_CCPMX_RB3                        00002FFF
+_CONFIG1                          00002007
+_CONFIG2                          00002008
+_CPD_OFF                          00003FFF
+_CPD_ON                           00003EFF
+_CP_ALL                           00001FFF
+_CP_OFF                           00003FFF
+_CP_ON                            00001FFF
+_Ci                               0000003C
+_D                                00000061
+_DEBUG_OFF                        00003FFF
+_DEBUG_ON                         000037FF
+_DEVID1                           00002006
+_EXTCLK                           00003FEF
+_EXTRC_CLKOUT                     00003FFF
+_EXTRC_IO                         00003FFE
+_End                              00000098
+_FCMEN_OFF                        00003FFE
+_FCMEN_ON                         00003FFF
+_FOSC_EC                          00003FEF
+_FOSC_EXTRCCLK                    00003FFF
+_FOSC_EXTRCIO                     00003FFE
+_FOSC_HS                          00003FEE
+_FOSC_INTOSCCLK                   00003FFD
+_FOSC_INTOSCIO                    00003FFC
+_FOSC_LP                          00003FEC
+_FOSC_XT                          00003FED
+_HS_OSC                           00003FEE
+_IDLOC0                           00002000
+_IDLOC1                           00002001
+_IDLOC2                           00002002
+_IDLOC3                           00002003
+_IESO_OFF                         00003FFD
+_IESO_ON                          00003FFF
+_INTRC_CLKOUT                     00003FFD
+_INTRC_IO                         00003FFC
+_LP_OSC                           00003FEC
+_LVP_OFF                          00003F7F
+_LVP_ON                           00003FFF
+_M                                00000063
+_MCLRE_OFF                        00003FDF
+_MCLRE_ON                         00003FFF
+_MCLR_OFF                         00003FDF
+_MCLR_ON                          00003FFF
+MPASM  5.51                          MAIN.ASM   10-6-2018  10:42:38         PAGE 21
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FF7
+_R                                00000034
+_U                                00000060
+_WDTE_OFF                         00003FFB
+_WDTE_ON                          00003FFF
+_WDT_OFF                          00003FFB
+_WDT_ON                           00003FFF
+_WRT_2048                         00003BFF
+_WRT_256                          00003DFF
+_WRT_ALL                          000039FF
+_WRT_OFF                          00003FFF
+_WRT_PROTECT_2048                 00003BFF
+_WRT_PROTECT_256                  00003DFF
+_WRT_PROTECT_ALL                  000039FF
+_WRT_PROTECT_OFF                  00003FFF
+_XT_OSC                           00003FED
+__16F886                          00000001
+__DEBUG                           1
+bit                               00000024
+check_c                           00000050
+check_h_c                         0000006C
+check_low                         00000049
+dato                              00000023
+htemp                             00000040
+ltemp                             00000041
+noupdate                          00000061
+noupdate_2                        0000007B
+noupdate_3                        0000008C
+rotate                            0000003A
+s1S0                              000000BA
+start_DIG_1                       00000000
+start_DIG_2                       0000000A
+start_DIG_3                       00000064
+start_DIG_4                       000003E8
+temp                              00000065
+temp2                             00000064
+val                               00000066
+
+Errors   :     0
+Warnings :   143 reported,     0 suppressed
+Messages :    24 reported,     0 suppressed
+
+

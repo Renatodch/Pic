@@ -1,0 +1,9 @@
+Message[302] R:\DEVELOP\MPLAB\16F88\BYRENATO.X\MAIN.ASM 23 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] R:\DEVELOP\MPLAB\16F88\BYRENATO.X\MAIN.ASM 26 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] R:\DEVELOP\MPLAB\16F88\BYRENATO.X\MAIN.ASM 27 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] R:\DEVELOP\MPLAB\16F88\BYRENATO.X\MAIN.ASM 32 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] R:\DEVELOP\MPLAB\16F88\BYRENATO.X\MACROS.INC 7 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] R:\DEVELOP\MPLAB\16F88\BYRENATO.X\MACROS.INC 7 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] R:\DEVELOP\MPLAB\16F88\BYRENATO.X\MAIN.ASM 65 : Using default destination of 1 (file).
+Message[302] R:\DEVELOP\MPLAB\16F88\BYRENATO.X\MAIN.ASM 77 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[207] R:\DEVELOP\MPLAB\16F88\BYRENATO.X\MAIN.ASM 92 : Found label after column 1. (Delay_100s)
